@@ -20,8 +20,8 @@ namespace RTFrontend
 {
     public partial class RenderWindow : Form
     {
-        public const int XRes = 1600;
-        public const int YRes = 900;
+        public const int XRes = 640;
+        public const int YRes = 480;
 
         private Renderer renderer = null;
 
@@ -55,7 +55,7 @@ namespace RTFrontend
             om = Transformation.Translate(-2, 0, -4)*Transformation.Scale(0.9, 2, 1.2);
             graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 0.4, 1))));
 
-            om = Transformation.Translate(0, 5, 0);
+            om = Transformation.Translate(0, -1, 0);
             graph.Objects.AddLast(new Plane(om, new ColorShader(new RenderColor(0.5, 0.5, 0))));
 
             Context context = new Context();
