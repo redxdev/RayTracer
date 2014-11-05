@@ -55,7 +55,7 @@ namespace RTFrontend
             om = Transformation.Translate(-2, 0, -4)*Transformation.Scale(0.9, 2, 1.2);
             graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 0.4, 1))));
 
-            om = Transformation.Translate(0, 0, 0);
+            om = Transformation.Translate(0, 5, 0);
             graph.Objects.AddLast(new Plane(om, new ColorShader(new RenderColor(0.5, 0.5, 0))));
 
             Context context = new Context();
@@ -70,7 +70,7 @@ namespace RTFrontend
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            renderer.StartRender(Environment.ProcessorCount);
+            renderer.StartRender(1);
 
             while (!renderer.IsFinished)
             {

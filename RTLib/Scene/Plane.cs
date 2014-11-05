@@ -22,11 +22,27 @@ namespace RTLib.Scene
         public override bool Intersects(Ray ray, out double t)
         {
             Vector<double> normal = GetNormal(null);
+
+            double denom = normal.DotProduct(ray.Direction);
+            if (denom < 1e-6)
+            {
+                t = 0;
+                return false;
+            }
+
+            Vector<double> p = Vector<double>.Build.DenseOfArray(new double[] {0, 1, 0, 1});
+            p *= Transform;
+            p -= ray.Origin;
+            t = p.DotProduct(normal);
+
+            return t >= 0;
+
+            /*
             t = -(ray.Origin.DotProduct(normal))/(ray.Direction.DotProduct(normal));
             if (t <= 0)
                 return false;
 
-            return true;
+            return true;*/
         }
 
         public override RenderColor Shade(Context context, TraceInfo trace)
