@@ -53,6 +53,7 @@
     <Compile Include="Render\Renderer.cs" />
     <Compile Include="Render\TraceInfo.cs" />
     <Compile Include="Render\WorkerThread.cs" />
+    <Compile Include="Scene\Plane.cs" />
     <Compile Include="Scene\SceneGraph.cs" />
     <Compile Include="Scene\SceneObject.cs" />
     <Compile Include="Render\Ray.cs" />
