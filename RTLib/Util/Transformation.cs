@@ -22,5 +22,18 @@ namespace RTLib.Util
 
             return matrix;
         }
+
+        public static Matrix<double> Scale(double x, double y, double z)
+        {
+            Matrix<double> matrix = Matrix<double>.Build.DenseOfArray(new double[,]
+            {
+                {x, 0, 0, 0},
+                {0, y, 0, 0},
+                {0, 0, z, 0},
+                {0, 0, 0, 1}
+            });
+
+            return matrix;
+        }
     }
 }

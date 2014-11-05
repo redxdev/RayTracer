@@ -13,6 +13,7 @@ using RTLib.Render;
 using RTLib.Render.Targets;
 using RTLib.Scene;
 using RTLib.Util;
+using Color = RTLib.Util.Color;
 
 namespace RTFrontend
 {
@@ -37,8 +38,12 @@ namespace RTFrontend
             targets.AddLast(new LiveBitmapTarget(bitmap));
 
             SceneGraph graph = new SceneGraph();
+
             Matrix<double> om = Transformation.Translate(0, 0, -5);
             graph.Objects.AddLast(new Sphere(om, 1));
+
+            om = Transformation.Translate(0.4, 0, -6) * Transformation.Scale(1, 2, 1);
+            graph.Objects.AddLast(new Sphere(om, 1, new Color(1, 0, 0)));
 
             Context context = new Context();
             context.Width = 640;
