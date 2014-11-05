@@ -12,7 +12,6 @@ namespace RTLib.Scene
 {
     public class Plane : SceneObject
     {
-
         public Plane(Matrix<double> transform, IShader shader) : base(transform)
         {
             Shader = shader;
@@ -37,8 +36,9 @@ namespace RTLib.Scene
 
         public override Vector<double> GetNormal(Vector<double> point)
         {
-            Vector<double> normal = Vector<double>.Build.DenseOfArray(new double[] {0, 1, 0, 1});
+            Vector<double> normal = Vector<double>.Build.DenseOfArray(new double[] {0, 1, 0, 0});
             normal *= Transform;
+            normal /= normal.Norm(2d);
             return normal;
         }
     }
