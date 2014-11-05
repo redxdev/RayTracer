@@ -19,11 +19,11 @@ namespace RTLib.Render
     {
         private ConcurrentQueue<RenderJob> _jobs = new ConcurrentQueue<RenderJob>();
 
-        private Color[,] _pixels = null;
+        private RenderColor[,] _pixels = null;
 
         public RenderState(int width, int height)
         {
-            _pixels = new Color[width,height];
+            _pixels = new RenderColor[width,height];
 
             for (int j = 0; j < height; ++j)
             {
@@ -34,7 +34,7 @@ namespace RTLib.Render
             }
         }
 
-        public Color[,] Pixels { get { return _pixels; } }
+        public RenderColor[,] Pixels { get { return _pixels; } }
 
         public bool StartJob(int threadId, out int i, out int j)
         {
@@ -64,7 +64,7 @@ namespace RTLib.Render
             return true;
         }
 
-        public void FinishJob(int i, int j, Color color)
+        public void FinishJob(int i, int j, RenderColor color)
         {
             _pixels[i, j] = color;
         }

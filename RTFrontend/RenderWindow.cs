@@ -10,10 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathNet.Numerics.LinearAlgebra;
+using RTLib.Material;
 using RTLib.Render;
 using RTLib.Scene;
 using RTLib.Util;
-using Color = RTLib.Util.Color;
+using Color = RTLib.Util.RenderColor;
 
 namespace RTFrontend
 {
@@ -40,13 +41,13 @@ namespace RTFrontend
             SceneGraph graph = new SceneGraph();
 
             Matrix<double> om = Transformation.Translate(0, 0, -5);
-            graph.Objects.AddLast(new Sphere(om, 1));
+            graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 1, 0))));
 
             om = Transformation.Translate(0.4, 0, -6)*Transformation.Scale(1, 2, 1);
-            graph.Objects.AddLast(new Sphere(om, 1, new Color(1, 0, 0)));
+            graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(1, 0, 0))));
 
             om = Transformation.Translate(-2, 0, -4)*Transformation.Scale(0.9, 2, 1.2);
-            graph.Objects.AddLast(new Sphere(om, 1, new Color(0, 0.4, 1)));
+            graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 0.4, 1))));
 
             Context context = new Context();
             context.Width = XRes;
@@ -74,7 +75,7 @@ namespace RTFrontend
             {
                 for (int y = 0; y < YRes; ++y)
                 {
-                    Color color = renderer.State.Pixels[x, y];
+                    RenderColor color = renderer.State.Pixels[x, y];
                     System.Drawing.Color bmpColor = System.Drawing.Color.FromArgb(255, color.RByte, color.GByte,
                         color.BByte);
                     bitmap.SetPixel(x, y, bmpColor);

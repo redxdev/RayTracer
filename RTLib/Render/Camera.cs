@@ -48,7 +48,7 @@ namespace RTLib.Render
             throw new NotImplementedException();
         }
 
-        public override Color Shade(Context context, Ray ray)
+        public override RenderColor Shade(Context context, Ray ray, double vx, double vy)
         {
             throw new NotImplementedException();
         }

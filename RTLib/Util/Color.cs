@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace RTLib.Util
 {
-    public struct Color
+    public struct RenderColor
     {
         private double _r;
         private double _g;
         private double _b;
 
-        public Color(double r, double g, double b)
+        public RenderColor(double r, double g, double b)
         {
             _r = r;
             _g = g;

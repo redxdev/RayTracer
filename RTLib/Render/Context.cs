@@ -13,12 +13,12 @@ namespace RTLib.Render
         private int _width = 640;
         private int _height = 480;
         private double _aspectRatio;
-        private Color _backgroundColor;
+        private RenderColor _backgroundColor;
 
         public Context()
         {
             _aspectRatio = Width/(double) Height;
-            _backgroundColor = new Color(0.392d, 0.584d, 0.929d);
+            _backgroundColor = new RenderColor(0.392d, 0.584d, 0.929d);
 
             MaxRecursion = 16;
         }
@@ -54,7 +54,7 @@ namespace RTLib.Render
             get { return _aspectRatio; }
         }
 
-        public Color BackgroundColor
+        public RenderColor BackgroundColor
         {
             get { return _backgroundColor; }
             set { _backgroundColor = value; }

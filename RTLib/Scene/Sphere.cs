@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
+using RTLib.Material;
 using RTLib.Render;
 using RTLib.Util;
 
@@ -17,14 +18,14 @@ namespace RTLib.Scene
         private double _radius;
         private double _radiusSquared;
 
-        public Sphere(Matrix<double> transform, double radius, Color? color = null)
+        public Sphere(Matrix<double> transform, double radius, IShader shader)
             : base(transform)
         {
-            OutputColor = color ?? new Color(0d, 1d, 0d);
+            Shader = shader;
             Radius = radius;
         }
 
-        public Color OutputColor { get; set; }
+        public IShader Shader { get; set; }
 
         public double Radius
         {
@@ -81,9 +82,9 @@ namespace RTLib.Scene
             return true;
         }
 
-        public override Color Shade(Context context, Ray ray)
+        public override RenderColor Shade(Context context, Ray ray, double vx, double vy)
         {
-            return OutputColor;
+            return Shader.RunShader(context, ray, vx, vy);
         }
     }
 }

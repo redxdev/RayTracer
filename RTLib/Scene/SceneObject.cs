@@ -43,6 +43,6 @@ namespace RTLib.Scene
 
         public abstract bool Intersects(Ray ray, out double t);
 
-        public abstract Color Shade(Context context, Ray ray);
+        public abstract RenderColor Shade(Context context, Ray ray, double vx, double vy);
     }
 }

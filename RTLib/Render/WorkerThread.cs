@@ -41,14 +41,14 @@ namespace RTLib.Render
                 rayDirection /= (double)rayDirection.Norm(2d);
 
                 Ray ray = new Ray(rayOrigin, rayDirection, 0, _renderer.Context.RenderCamera.NearClippingPlane, _renderer.Context.RenderCamera.FarClippingPlane);
-                Color result = Trace(ray);
+                RenderColor result = Trace(ray, x, y);
                 _renderer.State.FinishJob(i, j, result);
             }
 
             Console.WriteLine(string.Format("Worker thread #{0} finished", _threadId));
         }
 
-        protected Color Trace(Ray ray)
+        protected RenderColor Trace(Ray ray, double vx, double vy)
         {
             double tClosest = ray.MaxDistance;
             SceneObject hitObject = null;
@@ -69,7 +69,7 @@ namespace RTLib.Render
             if (hitObject == null)
                 return _renderer.Context.BackgroundColor;
 
-            return hitObject.Shade(_renderer.Context, ray);
+            return hitObject.Shade(_renderer.Context, ray, vx, vy);
         }
     }
 }
