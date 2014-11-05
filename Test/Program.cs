@@ -19,7 +19,7 @@ namespace RTTest
             Context rc = new Context();
 
             Matrix<double> cameraMatrix = Transformation.Translate(0, 0, 5);
-            rc.RenderCamera = new Camera(cameraMatrix, 30d);
+            rc.RenderCamera = new Camera(cameraMatrix, 90d);
 
             SceneGraph graph = new SceneGraph();
             Matrix<double> om = Transformation.Translate(0, 0, -5);
