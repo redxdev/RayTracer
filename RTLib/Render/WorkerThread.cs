@@ -9,7 +9,7 @@ using RTLib.Util;
 
 namespace RTLib.Render
 {
-    public class WorkerThread
+    public class WorkerThread : IRayTracer
     {
         private Renderer _renderer;
         private int _threadId = 0;
@@ -41,14 +41,14 @@ namespace RTLib.Render
                 rayDirection /= rayDirection.Norm(2d);
 
                 Ray ray = new Ray(rayOrigin, rayDirection, 0, _renderer.Context.RenderCamera.NearClippingPlane, _renderer.Context.RenderCamera.FarClippingPlane);
-                RenderColor result = Trace(ray, x, y);
+                RenderColor result = Trace(ray);
                 _renderer.State.FinishJob(i, j, result);
             }
 
             Console.WriteLine(string.Format("Worker thread #{0} finished", _threadId));
         }
 
-        protected RenderColor Trace(Ray ray, double vx, double vy)
+        public RenderColor Trace(Ray ray)
         {
             double tClosest = ray.MaxDistance;
             SceneObject hitObject = null;
@@ -70,11 +70,10 @@ namespace RTLib.Render
                 return _renderer.Context.BackgroundColor;
 
             TraceInfo trace = new TraceInfo();
-            trace.VX = vx;
-            trace.VY = vy;
             trace.T = tClosest;
             trace.Raycast = ray;
             trace.Intersection = ray.Origin + ray.Direction*tClosest;
+            trace.Raytracer = this;
 
             return hitObject.Shade(_renderer.Context, trace);
         }

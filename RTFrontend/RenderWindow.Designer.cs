@@ -37,16 +37,18 @@
             // 
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(624, 441);
+            this.pictureBox.Size = new System.Drawing.Size(1248, 848);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
             // renderButton
             // 
-            this.renderButton.Location = new System.Drawing.Point(537, 406);
+            this.renderButton.Location = new System.Drawing.Point(15, 15);
+            this.renderButton.Margin = new System.Windows.Forms.Padding(6);
             this.renderButton.Name = "renderButton";
-            this.renderButton.Size = new System.Drawing.Size(75, 23);
+            this.renderButton.Size = new System.Drawing.Size(150, 44);
             this.renderButton.TabIndex = 1;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = true;
@@ -54,12 +56,14 @@
             // 
             // RenderWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 441);
+            this.ClientSize = new System.Drawing.Size(1248, 848);
             this.Controls.Add(this.renderButton);
             this.Controls.Add(this.pictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
             this.Name = "RenderWindow";
             this.Text = "RenderWindow";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();

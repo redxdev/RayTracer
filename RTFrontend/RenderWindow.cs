@@ -40,14 +40,8 @@ namespace RTFrontend
 
             SceneGraph graph = new SceneGraph();
 
-            DelegateShader normalShader = new DelegateShader((obj, ctx, trace) =>
-            {
-                Vector<double> normal = obj.GetNormal(trace.Intersection);
-                return new RenderColor(normal[0], normal[1], normal[2]);
-            });
-
             Matrix<double> om = Transformation.Translate(0, 0, -5);
-            graph.Objects.AddLast(new Sphere(om, 1, normalShader));
+            graph.Objects.AddLast(new Sphere(om, 1, new SurfaceNormalShader()));
 
             om = Transformation.Translate(0.4, 0, -6)*Transformation.Scale(1, 2, 1);
             graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 0, 0))));
@@ -70,7 +64,7 @@ namespace RTFrontend
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            renderer.StartRender(1);
+            renderer.StartRender(4);
 
             while (!renderer.IsFinished)
             {

@@ -10,13 +10,12 @@ namespace RTLib.Render
 {
     public struct TraceInfo
     {
-        public double VX { get; set; }
-        public double VY { get; set; }
-
         public double T { get; set; }
 
         public Ray Raycast { get; set; }
 
         public Vector<double> Intersection { get; set; }
+
+        public IRayTracer Raytracer { get; set; }
     }
 }
