@@ -82,9 +82,9 @@ namespace RTLib.Scene
             return true;
         }
 
-        public override RenderColor Shade(Context context, Ray ray, TraceInfo trace)
+        public override RenderColor Shade(Context context, TraceInfo trace)
         {
-            return Shader.RunShader(this, context, ray, trace);
+            return Shader.RunShader(this, context, trace);
         }
 
         public override Vector<double> GetNormal(Vector<double> point)

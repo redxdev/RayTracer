@@ -70,11 +70,13 @@ namespace RTLib.Render
                 return _renderer.Context.BackgroundColor;
 
             TraceInfo trace = new TraceInfo();
-            trace.t = tClosest;
-            trace.vx = vx;
-            trace.vy = vy;
+            trace.VX = vx;
+            trace.VY = vy;
+            trace.T = tClosest;
+            trace.Raycast = ray;
+            trace.Intersection = ray.Origin + ray.Direction*tClosest;
 
-            return hitObject.Shade(_renderer.Context, ray, trace);
+            return hitObject.Shade(_renderer.Context, trace);
         }
     }
 }

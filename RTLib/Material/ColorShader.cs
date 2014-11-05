@@ -18,7 +18,7 @@ namespace RTLib.Material
 
         public RenderColor Color { get; set; }
 
-        public RenderColor RunShader(SceneObject obj, Context context, Ray ray, TraceInfo trace)
+        public RenderColor RunShader(SceneObject obj, Context context, TraceInfo trace)
         {
             return Color;
         }

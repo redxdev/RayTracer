@@ -11,6 +11,6 @@ namespace RTLib.Material
 {
     public interface IShader
     {
-        RenderColor RunShader(SceneObject obj, Context context, Ray ray, TraceInfo trace);
+        RenderColor RunShader(SceneObject obj, Context context, TraceInfo trace);
     }
 }

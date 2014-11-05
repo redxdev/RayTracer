@@ -40,10 +40,9 @@ namespace RTFrontend
 
             SceneGraph graph = new SceneGraph();
 
-            DelegateShader normalShader = new DelegateShader((obj, ctx, ray, trace) =>
+            DelegateShader normalShader = new DelegateShader((obj, ctx, trace) =>
             {
-                Vector<double> p = ray.Origin + ray.Direction*trace.t;
-                Vector<double> normal = obj.GetNormal(p);
+                Vector<double> normal = obj.GetNormal(trace.Intersection);
                 return new RenderColor(normal[0], normal[1], normal[2]);
             });
 

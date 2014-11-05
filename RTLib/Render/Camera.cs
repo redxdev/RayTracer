@@ -48,7 +48,7 @@ namespace RTLib.Render
             throw new NotImplementedException();
         }
 
-        public override RenderColor Shade(Context context, Ray ray, TraceInfo trace)
+        public override RenderColor Shade(Context context, TraceInfo trace)
         {
             throw new NotImplementedException();
         }
