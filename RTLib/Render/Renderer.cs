@@ -47,9 +47,6 @@ namespace RTLib.Render
             {
                 for (int i = 0; i < Context.Width; ++i)
                 {
-                    if(i == 640 / 2 && j == 480 / 2)
-                        Console.WriteLine("There");
-
                     double x = (2d*((i + 0.5d)/Context.Width) - 1d)*Context.AspectRatio*Context.RenderCamera.Angle;
                     double y = (1d - 2d*((j + 0.5d)/Context.Height))*Context.RenderCamera.Angle;
 
