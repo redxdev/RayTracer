@@ -40,11 +40,18 @@ namespace RTFrontend
 
             SceneGraph graph = new SceneGraph();
 
+            DelegateShader normalShader = new DelegateShader((obj, ctx, ray, trace) =>
+            {
+                Vector<double> p = ray.Origin + ray.Direction*trace.t;
+                Vector<double> normal = obj.GetNormal(p);
+                return new RenderColor(normal[0], normal[1], normal[2]);
+            });
+
             Matrix<double> om = Transformation.Translate(0, 0, -5);
-            graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 1, 0))));
+            graph.Objects.AddLast(new Sphere(om, 1, normalShader));
 
             om = Transformation.Translate(0.4, 0, -6)*Transformation.Scale(1, 2, 1);
-            graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(1, 0, 0))));
+            graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 0, 0))));
 
             om = Transformation.Translate(-2, 0, -4)*Transformation.Scale(0.9, 2, 1.2);
             graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 0.4, 1))));

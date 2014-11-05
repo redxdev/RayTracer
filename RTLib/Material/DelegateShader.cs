@@ -9,18 +9,18 @@ using RTLib.Util;
 
 namespace RTLib.Material
 {
-    public class ColorShader : IShader
+    public class DelegateShader : IShader
     {
-        public ColorShader(RenderColor color)
-        {
-            Color = color;
-        }
+        private Func<SceneObject, Context, Ray, TraceInfo, RenderColor> _func;
 
-        public RenderColor Color { get; set; }
+        public DelegateShader(Func<SceneObject, Context, Ray, TraceInfo, RenderColor> func)
+        {
+            _func = func;
+        }
 
         public RenderColor RunShader(SceneObject obj, Context context, Ray ray, TraceInfo trace)
         {
-            return Color;
+            return _func(obj, context, ray, trace);
         }
     }
 }

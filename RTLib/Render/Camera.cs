@@ -48,7 +48,12 @@ namespace RTLib.Render
             throw new NotImplementedException();
         }
 
-        public override RenderColor Shade(Context context, Ray ray, double vx, double vy)
+        public override RenderColor Shade(Context context, Ray ray, TraceInfo trace)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Vector<double> GetNormal(Vector<double> point)
         {
             throw new NotImplementedException();
         }

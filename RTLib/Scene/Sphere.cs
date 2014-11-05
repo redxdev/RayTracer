@@ -82,9 +82,18 @@ namespace RTLib.Scene
             return true;
         }
 
-        public override RenderColor Shade(Context context, Ray ray, double vx, double vy)
+        public override RenderColor Shade(Context context, Ray ray, TraceInfo trace)
         {
-            return Shader.RunShader(context, ray, vx, vy);
+            return Shader.RunShader(this, context, ray, trace);
+        }
+
+        public override Vector<double> GetNormal(Vector<double> point)
+        {
+            Vector<double> origin = Vector<double>.Build.DenseOfArray(new double[] {0, 0, 0, 1});
+            origin *= Transform;
+            Vector<double> normal = point - origin;
+            normal /= normal.Norm(2);
+            return normal;
         }
     }
 }

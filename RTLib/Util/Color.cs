@@ -30,5 +30,10 @@ namespace RTLib.Util
         public byte GByte { get { return (byte) (_g*255); } }
 
         public byte BByte { get { return (byte) (_b*255); } }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, {1}, {2}", R, G, B);
+        }
     }
 }

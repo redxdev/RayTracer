@@ -38,7 +38,7 @@ namespace RTLib.Render
                 cameraPos *= _renderer.Context.RenderCamera.Transform;
 
                 Vector<double> rayDirection = cameraPos - rayOrigin;
-                rayDirection /= (double)rayDirection.Norm(2d);
+                rayDirection /= rayDirection.Norm(2d);
 
                 Ray ray = new Ray(rayOrigin, rayDirection, 0, _renderer.Context.RenderCamera.NearClippingPlane, _renderer.Context.RenderCamera.FarClippingPlane);
                 RenderColor result = Trace(ray, x, y);
@@ -69,7 +69,12 @@ namespace RTLib.Render
             if (hitObject == null)
                 return _renderer.Context.BackgroundColor;
 
-            return hitObject.Shade(_renderer.Context, ray, vx, vy);
+            TraceInfo trace = new TraceInfo();
+            trace.t = tClosest;
+            trace.vx = vx;
+            trace.vy = vy;
+
+            return hitObject.Shade(_renderer.Context, ray, trace);
         }
     }
 }
