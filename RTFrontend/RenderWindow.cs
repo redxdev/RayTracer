@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathNet.Numerics.LinearAlgebra;
 using RTLib.Render;
-using RTLib.Render.Targets;
 using RTLib.Scene;
 using RTLib.Util;
 using Color = RTLib.Util.Color;
@@ -19,6 +19,9 @@ namespace RTFrontend
 {
     public partial class RenderWindow : Form
     {
+        public const int XRes = 1600;
+        public const int YRes = 900;
+
         private Renderer renderer = null;
 
         public RenderWindow()
@@ -31,31 +34,57 @@ namespace RTFrontend
             if (renderer != null)
                 return;
 
-            Bitmap bitmap = new Bitmap(640, 480);
+            Bitmap bitmap = new Bitmap(XRes, YRes);
             pictureBox.Image = bitmap;
-
-            LinkedList<IRenderTarget> targets = new LinkedList<IRenderTarget>();
-            targets.AddLast(new LiveBitmapTarget(bitmap));
 
             SceneGraph graph = new SceneGraph();
 
             Matrix<double> om = Transformation.Translate(0, 0, -5);
             graph.Objects.AddLast(new Sphere(om, 1));
 
-            om = Transformation.Translate(0.4, 0, -6) * Transformation.Scale(1, 2, 1);
+            om = Transformation.Translate(0.4, 0, -6)*Transformation.Scale(1, 2, 1);
             graph.Objects.AddLast(new Sphere(om, 1, new Color(1, 0, 0)));
 
+            om = Transformation.Translate(-2, 0, -4)*Transformation.Scale(0.9, 2, 1.2);
+            graph.Objects.AddLast(new Sphere(om, 1, new Color(0, 0.4, 1)));
+
             Context context = new Context();
-            context.Width = 640;
-            context.Height = 480;
+            context.Width = XRes;
+            context.Height = YRes;
 
             Matrix<double> cm = Transformation.Translate(0, 0, 5);
-            context.RenderCamera = new Camera(cm, 30);
+            context.RenderCamera = new Camera(cm, 90);
             
-            renderer = new Renderer(context, graph, targets);
-            renderer.Render();
+            renderer = new Renderer(context, graph);
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            renderer.StartRender(Environment.ProcessorCount);
+
+            while (!renderer.IsFinished)
+            {
+                Thread.Sleep(10);
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine(string.Format("Rendering took {0} seconds", stopwatch.Elapsed.TotalSeconds));
+
+            for (int x = 0; x < XRes; ++x)
+            {
+                for (int y = 0; y < YRes; ++y)
+                {
+                    Color color = renderer.State.Pixels[x, y];
+                    System.Drawing.Color bmpColor = System.Drawing.Color.FromArgb(255, color.RByte, color.GByte,
+                        color.BByte);
+                    bitmap.SetPixel(x, y, bmpColor);
+                }
+            }
 
             renderer = null;
+
+            this.Width = XRes;
+            this.Height = YRes;
         }
     }
 }
