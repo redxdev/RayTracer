@@ -59,7 +59,7 @@ namespace RTLib.Scene
 
         public abstract bool Intersects(Ray ray, out double t);
 
-        public abstract RenderColor Shade(Context context, TraceInfo trace);
+        public abstract RenderColor Shade(Context context, TraceResult trace);
 
         public abstract Vector<double> GetNormal(Vector<double> point);
     }

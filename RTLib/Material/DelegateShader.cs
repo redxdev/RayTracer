@@ -11,14 +11,14 @@ namespace RTLib.Material
 {
     public class DelegateShader : IShader
     {
-        private Func<SceneObject, Context, TraceInfo, RenderColor> _func;
+        private Func<SceneObject, Context, TraceResult, RenderColor> _func;
 
-        public DelegateShader(Func<SceneObject, Context, TraceInfo, RenderColor> func)
+        public DelegateShader(Func<SceneObject, Context, TraceResult, RenderColor> func)
         {
             _func = func;
         }
 
-        public RenderColor RunShader(SceneObject obj, Context context, TraceInfo trace)
+        public RenderColor RunShader(SceneObject obj, Context context, TraceResult trace)
         {
             return _func(obj, context, trace);
         }

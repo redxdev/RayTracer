@@ -53,7 +53,7 @@
     <Compile Include="Render\IRayTracer.cs" />
     <Compile Include="Render\RenderState.cs" />
     <Compile Include="Render\Renderer.cs" />
-    <Compile Include="Render\TraceInfo.cs" />
+    <Compile Include="Render\TraceResult.cs" />
     <Compile Include="Render\WorkerThread.cs" />
     <Compile Include="Scene\Plane.cs" />
     <Compile Include="Scene\SceneGraph.cs" />

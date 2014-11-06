@@ -33,7 +33,7 @@ namespace RTLib.Scene
             return true;
         }
 
-        public override RenderColor Shade(Context context, TraceInfo trace)
+        public override RenderColor Shade(Context context, TraceResult trace)
         {
             return Shader.RunShader(this, context, trace);
         }

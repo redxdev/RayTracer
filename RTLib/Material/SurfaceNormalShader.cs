@@ -13,7 +13,7 @@ namespace RTLib.Material
 {
     public class SurfaceNormalShader : IShader
     {
-        public RenderColor RunShader(SceneObject obj, Context context, TraceInfo trace)
+        public RenderColor RunShader(SceneObject obj, Context context, TraceResult trace)
         {
             Vector<double> normal = obj.GetNormal(trace.Intersection);
 

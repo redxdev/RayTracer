@@ -10,6 +10,6 @@ namespace RTLib.Render
 {
     public interface IRayTracer
     {
-        RenderColor Trace(Ray ray);
+        TraceResult? Trace(Ray ray);
     }
 }
