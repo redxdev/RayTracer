@@ -10,11 +10,12 @@ using RTLib.Util;
 
 namespace RTLib.Scene
 {
-    public class PointLight : SceneObject
+    public class PointLight : Light
     {
         public PointLight(Matrix<double> transform, IShader shader, double intensity = 1d) : base(transform)
         {
             Intensity = intensity;
+            Shader = shader;
         }
 
         public IShader Shader { get; set; }
@@ -25,19 +26,14 @@ namespace RTLib.Scene
             return ObjectType.Light;
         }
 
-        public override bool Intersects(Ray ray, out double t)
+        public override RenderColor ShadeLight(Context context, Ray ray)
         {
-            throw new NotImplementedException();
-        }
+            TraceResult trace = new TraceResult()
+            {
+                Raycast = ray
+            };
 
-        public override RenderColor Shade(Context context, TraceResult trace)
-        {
             return Shader.RunShader(this, context, trace) * Intensity;
-        }
-
-        public override Vector<double> GetNormal(Vector<double> point)
-        {
-            throw new NotImplementedException();
         }
     }
 }

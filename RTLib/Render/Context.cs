@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics.LinearAlgebra.Complex;
+using RTLib.Scene;
 using RTLib.Util;
 
 namespace RTLib.Render
@@ -63,6 +64,8 @@ namespace RTLib.Render
         public int MaxRecursion { get; set; }
 
         public Camera RenderCamera { get; set; }
+
+        public SceneGraph Graph { get; set; }
 
         public override string ToString()
         {

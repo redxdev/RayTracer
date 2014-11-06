@@ -18,6 +18,11 @@ namespace RTLib.Util
             return color*val;
         }
 
+        public static RenderColor operator +(RenderColor a, RenderColor b)
+        {
+            return new RenderColor(a._r + b._r, a._g + b._g, a._b + b._b);
+        }
+
         private double _r;
         private double _g;
         private double _b;

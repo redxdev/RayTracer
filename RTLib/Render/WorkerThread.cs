@@ -56,7 +56,7 @@ namespace RTLib.Render
             double tClosest = ray.MaxDistance;
             SceneObject hitObject = null;
 
-            foreach (var obj in _renderer.Graph.Objects)
+            foreach (var obj in _renderer.Context.Graph.Objects)
             {
                 if (obj.GetObjectType() != traceType)
                     continue;

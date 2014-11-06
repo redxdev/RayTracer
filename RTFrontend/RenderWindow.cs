@@ -46,7 +46,10 @@ namespace RTFrontend
             SceneGraph graph = new SceneGraph();
 
             Matrix<double> om = Transformation.Translate(0, 0, -5);
-            graph.Objects.AddLast(new Sphere(om, 3, new SurfaceNormalShader()));
+            graph.Objects.AddLast(new Sphere(om, 3, new DiffuseShader(0.9, 0.1, new ColorShader(new RenderColor(0.5, 0.5, 0.5)))));
+
+            om = Transformation.Translate(0, 5, -3);
+            graph.Objects.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1)), 0.5));
 
             Context context = new Context();
             context.Width = xres;
@@ -54,8 +57,9 @@ namespace RTFrontend
 
             Matrix<double> cm = Transformation.Translate(0, 0, 5);
             context.RenderCamera = new Camera(cm, 90);
+            context.Graph = graph;
             
-            renderer = new Renderer(context, graph);
+            renderer = new Renderer(context);
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();

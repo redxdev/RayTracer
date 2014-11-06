@@ -15,15 +15,12 @@ namespace RTLib.Render
     {
         private Thread[] _threads = null;
 
-        public Renderer(Context context, SceneGraph graph)
+        public Renderer(Context context)
         {
             Context = context;
-            Graph = graph;
         }
 
         public Context Context { get; set; }
-
-        public SceneGraph Graph { get; set; }
 
         public RenderState State { get; set; }
 
