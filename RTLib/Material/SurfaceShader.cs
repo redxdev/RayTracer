@@ -34,33 +34,57 @@ namespace RTLib.Material
             Vector<double> normal = obj.GetNormal(trace.Intersection);
 
             RenderColor localColor = Subshader.RunShader(obj, context, trace);
-            RenderColor finalColor = new RenderColor(0, 0, 0);
+            RenderColor finalColor = new RenderColor(
+                        (1 - Diffuse) * localColor.R,
+                        (1 - Diffuse) * localColor.G,
+                        (1 - Diffuse) * localColor.B);
 
             foreach (Light light in context.Graph.Lights)
             {
-                Vector<double> rdir = Vector<double>.Build.DenseOfArray(new double[] {0, 0, 0, 1});
-                rdir *= light.Transform;
-                rdir = rdir - trace.Intersection;
+                Vector<double> ldir = Vector<double>.Build.DenseOfArray(new double[] {0, 0, 0, 1});
+                ldir *= light.Transform;
+                ldir = ldir - trace.Intersection;
+                ldir /= ldir.Norm(2d);
 
-                double factor = normal.DotProduct(rdir);
+                double factor = normal.DotProduct(ldir);
                 if (factor <= 0)
                     continue;
 
-                Ray ray = new Ray(trace.Intersection, rdir, trace.Raycast.Recursion + 1);
+                Ray ray = trace.Raytracer.CreateRay(trace.Intersection, ldir, trace.Raycast);
                 if (!light.CanShade(context, ray))
                     continue;
 
+                // shadows
+                Vector<double> lorigin = Vector<double>.Build.DenseOfArray(new double[] { 0, 0, 0, 1 });
+                lorigin *= light.Transform;
+                Ray shadowRay = trace.Raytracer.CreateRay(lorigin, -ldir, trace.Raycast);
+                double tThis = 0;
+                double tClosest = double.MaxValue;
+                foreach(SceneObject other in context.Graph.Objects)
+                {
+                    double t = 0;
+                    if (other.Intersects(shadowRay, out t))
+                    {
+                        if (other == obj)
+                            tThis = t;
+                        else if (t < tClosest)
+                            tClosest = t;
+                    }
+                }
+
+                if (tThis > tClosest)
+                    continue; // whoops, in a shadow!
+
+                // diffuse
                 RenderColor lightColor = light.Shade(context, ray);
 
                 finalColor += new RenderColor(
                     Diffuse*factor*lightColor.R,
                     Diffuse*factor*lightColor.G,
-                    Diffuse*factor*lightColor.B) + new RenderColor(
-                        (1 - Diffuse)*localColor.R,
-                        (1 - Diffuse)*localColor.G,
-                        (1 - Diffuse)*localColor.B);
+                    Diffuse*factor*lightColor.B);
 
-                Vector<double> refl = rdir - 2d*rdir.DotProduct(normal)*normal;
+                // specular
+                Vector<double> refl = ldir - 2d*ldir.DotProduct(normal)*normal;
                 refl /= refl.Norm(2d);
 
                 double rd = trace.Raycast.Direction.DotProduct(refl);

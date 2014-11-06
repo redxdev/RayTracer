@@ -123,7 +123,7 @@
             this.renderButton.Margin = new System.Windows.Forms.Padding(2);
             this.renderButton.Name = "renderButton";
             this.renderButton.Size = new System.Drawing.Size(118, 42);
-            this.renderButton.TabIndex = 8;
+            this.renderButton.TabIndex = 9;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = true;
             this.renderButton.Click += new System.EventHandler(this.renderButton_Click);
@@ -320,7 +320,7 @@
             this.saveButton.Location = new System.Drawing.Point(3, 202);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(115, 40);
-            this.saveButton.TabIndex = 11;
+            this.saveButton.TabIndex = 10;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -333,7 +333,7 @@
             this.haltOnException.Location = new System.Drawing.Point(124, 179);
             this.haltOnException.Name = "haltOnException";
             this.haltOnException.Size = new System.Drawing.Size(109, 17);
-            this.haltOnException.TabIndex = 13;
+            this.haltOnException.TabIndex = 8;
             this.haltOnException.Text = "Halt on exception";
             this.haltOnException.UseVisualStyleBackColor = true;
             // 
