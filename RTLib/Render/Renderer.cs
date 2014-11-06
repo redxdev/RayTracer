@@ -38,7 +38,7 @@ namespace RTLib.Render
             }
         }
 
-        public void StartRender(int threadCount)
+        public void StartRender(int threadCount, bool stopWorkerOnException = true)
         {
             Console.WriteLine("Rendering scene: " + Context);
 
@@ -50,7 +50,7 @@ namespace RTLib.Render
             _threads = new Thread[threadCount];
             for (int i = 0; i < threadCount; ++i)
             {
-                WorkerThread worker = new WorkerThread(this, i + 1);
+                WorkerThread worker = new WorkerThread(this, i + 1, stopWorkerOnException);
                 _threads[i] = new Thread(new ThreadStart(worker.WorkerProc));
                 _threads[i].Start();
             }

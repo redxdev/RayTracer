@@ -36,6 +36,14 @@ namespace RTLib.Render
 
         public RenderColor[,] Pixels { get { return _pixels; } }
 
+        public int JobsLeft
+        {
+            get
+            {
+                return _jobs.Count;
+            }
+        }
+
         public bool StartJob(int threadId, out int i, out int j)
         {
             if (_jobs.IsEmpty)

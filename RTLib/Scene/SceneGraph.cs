@@ -11,8 +11,11 @@ namespace RTLib.Scene
         public SceneGraph()
         {
             Objects = new LinkedList<SceneObject>();
+            Lights = new LinkedList<Light>();
         }
 
         public LinkedList<SceneObject> Objects { get; set; }
+
+        public LinkedList<Light> Lights { get; set; }
     }
 }

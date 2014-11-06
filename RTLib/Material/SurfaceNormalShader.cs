@@ -13,8 +13,12 @@ namespace RTLib.Material
 {
     public class SurfaceNormalShader : IShader
     {
-        public RenderColor RunShader(SceneObject obj, Context context, TraceResult trace)
+        public RenderColor RunShader(Spatial spatial, Context context, TraceResult trace)
         {
+            SceneObject obj = spatial as SceneObject;
+            if (obj == null)
+                throw new InvalidCastException("SurfaceNormalShader can only be applied to SceneObjects!");
+
             Vector<double> normal = obj.GetNormal(trace.Intersection);
 
             return new RenderColor(normal[0], normal[1], normal[2]);

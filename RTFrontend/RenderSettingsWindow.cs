@@ -26,6 +26,8 @@ namespace RTFrontend
 
         public int MaxRecursionDepth { get { return (int) maxRecursionDepth.Value; } }
 
+        public bool HaltOnException { get { return haltOnException.Checked; } }
+
         private RenderWindow _renderWindow = null;
 
         public RenderSettingsWindow(RenderWindow rw)

@@ -21,12 +21,13 @@ namespace RTLib.Scene
         public IShader Shader { get; set; }
 
         public double Intensity { get; set; }
-        public override ObjectType GetObjectType()
+
+        public override bool CanShade(Context context, Ray ray)
         {
-            return ObjectType.Light;
+            return true;
         }
 
-        public override RenderColor ShadeLight(Context context, Ray ray)
+        public override RenderColor Shade(Context context, Ray ray)
         {
             TraceResult trace = new TraceResult()
             {

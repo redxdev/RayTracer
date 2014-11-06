@@ -42,11 +42,6 @@ namespace RTLib.Scene
 
         public double RadiusSquared { get { return _radiusSquared; } }
 
-        public override ObjectType GetObjectType()
-        {
-            return ObjectType.Solid;
-        }
-
         public override bool Intersects(Ray ray, out double t)
         {
             Vector<double> rorig = ray.Origin*InverseTransform;

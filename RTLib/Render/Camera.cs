@@ -11,7 +11,7 @@ using RTLib.Util;
 
 namespace RTLib.Render
 {
-    public class Camera : SceneObject // extends sceneobject purely for convenience, don't actually use Camera in a scene
+    public class Camera : Spatial // extends sceneobject purely for convenience, don't actually use Camera in a scene
     {
         private double _fieldOfView;
         private double _angle;
@@ -42,25 +42,5 @@ namespace RTLib.Render
         public double NearClippingPlane { get; set; }
 
         public double FarClippingPlane { get; set; }
-
-        public override ObjectType GetObjectType()
-        {
-            return ObjectType.Ignore;
-        }
-
-        public override bool Intersects(Ray ray, out double t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override RenderColor Shade(Context context, TraceResult trace)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Vector<double> GetNormal(Vector<double> point)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -25,15 +25,19 @@ namespace RTLib.Material
 
         public IShader Subshader { get; set; }
 
-        public RenderColor RunShader(SceneObject obj, Context context, TraceResult trace)
+        public RenderColor RunShader(Spatial spatial, Context context, TraceResult trace)
         {
+            SceneObject obj = spatial as SceneObject;
+            if (obj == null)
+                throw new InvalidCastException("ReflectionShader can only be applied to SceneObjects");
+
             Vector<double> normal = obj.GetNormal(trace.Intersection);
 
             Vector<double> r = trace.Raycast.Direction - 2d*trace.Raycast.Direction.DotProduct(normal)*normal;
             r /= r.Norm(2d);
 
             Ray ray = trace.Raytracer.CreateRay(trace.Intersection, r, trace.Raycast);
-            TraceResult? tr = trace.Raytracer.Trace(ray, ObjectType.Solid);
+            TraceResult? tr = trace.Raytracer.Trace(ray);
 
             RenderColor rcol;
             if (tr == null)

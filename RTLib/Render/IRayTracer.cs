@@ -15,6 +15,6 @@ namespace RTLib.Render
     {
         Ray CreateRay(Vector<double> origin, Vector<double> direction, Ray previous = null);
 
-        TraceResult? Trace(Ray ray, ObjectType traceType);
+        TraceResult? Trace(Ray ray);
     }
 }

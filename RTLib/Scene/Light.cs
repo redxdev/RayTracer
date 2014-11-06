@@ -9,31 +9,14 @@ using RTLib.Util;
 
 namespace RTLib.Scene
 {
-    public abstract class Light : SceneObject
+    public abstract class Light :Spatial
     {
         protected Light(Matrix<double> transform) : base(transform)
         {
         }
-        public override ObjectType GetObjectType()
-        {
-            return ObjectType.Light;
-        }
 
-        public override bool Intersects(Ray ray, out double t)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool CanShade(Context context, Ray ray);
 
-        public override RenderColor Shade(Context context, TraceResult trace)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Vector<double> GetNormal(Vector<double> point)
-        {
-            throw new NotImplementedException();
-        }
-
-        public abstract RenderColor ShadeLight(Context context, Ray ray);
+        public abstract RenderColor Shade(Context context, Ray ray);
     }
 }
