@@ -45,11 +45,14 @@ namespace RTFrontend
 
             SceneGraph graph = new SceneGraph();
 
-            Matrix<double> om = Transformation.Translate(0, 0, -5);
+            Matrix<double> om = Transformation.Translate(0, 0, -8);
             graph.Objects.AddLast(new Sphere(om, 3, new DiffuseShader(0.9, 0.1, new ColorShader(new RenderColor(0.5, 0.5, 0.5)))));
 
-            om = Transformation.Translate(0, 5, -3);
-            graph.Objects.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1)), 0.5));
+            om = Transformation.Translate(0, 5, 5);
+            graph.Objects.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1)), 0.1));
+
+            om = Transformation.Translate(-5, 5, 5);
+            graph.Objects.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 0, 0)), 0.14));
 
             Context context = new Context();
             context.Width = xres;

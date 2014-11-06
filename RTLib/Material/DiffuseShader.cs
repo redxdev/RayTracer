@@ -50,6 +50,9 @@ namespace RTLib.Material
                 RenderColor lightColor = light.ShadeLight(context, ray);
 
                 double factor = normal.DotProduct(rdir);
+                if (factor <= 0)
+                    continue;
+
                 finalColor += new RenderColor(
                     Diffuse*factor*lightColor.R,
                     Diffuse*factor*lightColor.G,
