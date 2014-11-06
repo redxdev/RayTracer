@@ -8,6 +8,16 @@ namespace RTLib.Util
 {
     public struct RenderColor
     {
+        public static RenderColor operator *(RenderColor color, double val)
+        {
+            return new RenderColor(color._r*val, color._g*val, color._b*val);
+        }
+
+        public static RenderColor operator *(double val, RenderColor color)
+        {
+            return color*val;
+        }
+
         private double _r;
         private double _g;
         private double _b;

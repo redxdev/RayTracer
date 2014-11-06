@@ -41,7 +41,7 @@ namespace RTLib.Render
                 rayDirection /= rayDirection.Norm(2d);
 
                 Ray ray = new Ray(rayOrigin, rayDirection, 0, _renderer.Context.RenderCamera.NearClippingPlane, _renderer.Context.RenderCamera.FarClippingPlane);
-                TraceResult? result = Trace(ray);
+                TraceResult? result = Trace(ray, ObjectType.Solid);
                 RenderColor color = result == null
                     ? _renderer.Context.BackgroundColor
                     : result.Value.HitObject.Shade(_renderer.Context, result.Value);
@@ -51,13 +51,16 @@ namespace RTLib.Render
             Console.WriteLine(string.Format("Worker thread #{0} finished", _threadId));
         }
 
-        public TraceResult? Trace(Ray ray)
+        public TraceResult? Trace(Ray ray, ObjectType traceType)
         {
             double tClosest = ray.MaxDistance;
             SceneObject hitObject = null;
 
             foreach (var obj in _renderer.Graph.Objects)
             {
+                if (obj.GetObjectType() != traceType)
+                    continue;
+
                 double t = 0;
                 if (obj.Intersects(ray, out t))
                 {

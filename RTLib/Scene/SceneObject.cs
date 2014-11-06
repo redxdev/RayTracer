@@ -11,6 +11,13 @@ using RTLib.Util;
 
 namespace RTLib.Scene
 {
+    public enum ObjectType
+    {
+        Ignore = 1,
+        Solid = 2,
+        Light = 3
+    }
+
     public abstract class SceneObject
     {
         protected Matrix<double> _transform;
@@ -56,6 +63,8 @@ namespace RTLib.Scene
 
             _inverseTransform = _transform.Inverse();
         }
+
+        public abstract ObjectType GetObjectType();
 
         public abstract bool Intersects(Ray ray, out double t);
 

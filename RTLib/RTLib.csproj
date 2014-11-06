@@ -56,6 +56,7 @@
     <Compile Include="Render\TraceResult.cs" />
     <Compile Include="Render\WorkerThread.cs" />
     <Compile Include="Scene\Plane.cs" />
+    <Compile Include="Scene\PointLight.cs" />
     <Compile Include="Scene\SceneGraph.cs" />
     <Compile Include="Scene\SceneObject.cs" />
     <Compile Include="Render\Ray.cs" />

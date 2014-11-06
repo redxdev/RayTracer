@@ -43,6 +43,11 @@ namespace RTLib.Render
 
         public double FarClippingPlane { get; set; }
 
+        public override ObjectType GetObjectType()
+        {
+            return ObjectType.Ignore;
+        }
+
         public override bool Intersects(Ray ray, out double t)
         {
             throw new NotImplementedException();

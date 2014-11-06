@@ -4,12 +4,13 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using RTLib.Scene;
 using RTLib.Util;
 
 namespace RTLib.Render
 {
     public interface IRayTracer
     {
-        TraceResult? Trace(Ray ray);
+        TraceResult? Trace(Ray ray, ObjectType traceType);
     }
 }
