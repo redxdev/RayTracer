@@ -62,6 +62,7 @@
     <Compile Include="Scene\Sphere.cs" />
     <Compile Include="Material\IShader.cs" />
     <Compile Include="Util\Color.cs" />
+    <Compile Include="Util\Math.cs" />
     <Compile Include="Util\Transformation.cs" />
   </ItemGroup>
   <ItemGroup />

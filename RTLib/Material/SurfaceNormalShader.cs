@@ -16,6 +16,7 @@ namespace RTLib.Material
         public RenderColor RunShader(SceneObject obj, Context context, TraceInfo trace)
         {
             Vector<double> normal = obj.GetNormal(trace.Intersection);
+
             return new RenderColor(normal[0], normal[1], normal[2]);
         }
     }

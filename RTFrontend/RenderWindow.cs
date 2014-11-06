@@ -20,41 +20,37 @@ namespace RTFrontend
 {
     public partial class RenderWindow : Form
     {
-        public const int XRes = 640;
-        public const int YRes = 480;
-
         private Renderer renderer = null;
+
+        private RenderSettingsWindow renderSettingsWindow = null;
 
         public RenderWindow()
         {
             InitializeComponent();
+
+            renderSettingsWindow = new RenderSettingsWindow(this);
+            renderSettingsWindow.Show();
         }
 
-        private void renderButton_Click(object sender, EventArgs e)
+        public void DoRender()
         {
             if (renderer != null)
                 return;
 
-            Bitmap bitmap = new Bitmap(XRes, YRes);
+            int xres = renderSettingsWindow.XRes;
+            int yres = renderSettingsWindow.YRes;
+
+            Bitmap bitmap = new Bitmap(xres, yres);
             pictureBox.Image = bitmap;
 
             SceneGraph graph = new SceneGraph();
 
             Matrix<double> om = Transformation.Translate(0, 0, -5);
-            graph.Objects.AddLast(new Sphere(om, 1, new SurfaceNormalShader()));
-
-            om = Transformation.Translate(0.4, 0, -6)*Transformation.Scale(1, 2, 1);
-            graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 0, 0))));
-
-            om = Transformation.Translate(-2, 0, -4)*Transformation.Scale(0.9, 2, 1.2);
-            graph.Objects.AddLast(new Sphere(om, 1, new ColorShader(new RenderColor(0, 0.4, 1))));
-
-            om = Transformation.Translate(0, -1, 0);
-            graph.Objects.AddLast(new Plane(om, new ColorShader(new RenderColor(0.5, 0.5, 0))));
+            graph.Objects.AddLast(new Sphere(om, 3, new SurfaceNormalShader()));
 
             Context context = new Context();
-            context.Width = XRes;
-            context.Height = YRes;
+            context.Width = xres;
+            context.Height = yres;
 
             Matrix<double> cm = Transformation.Translate(0, 0, 5);
             context.RenderCamera = new Camera(cm, 90);
@@ -64,7 +60,7 @@ namespace RTFrontend
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            renderer.StartRender(4);
+            renderer.StartRender(renderSettingsWindow.ThreadCount);
 
             while (!renderer.IsFinished)
             {
@@ -74,9 +70,9 @@ namespace RTFrontend
             stopwatch.Stop();
             Console.WriteLine(string.Format("Rendering took {0} seconds", stopwatch.Elapsed.TotalSeconds));
 
-            for (int x = 0; x < XRes; ++x)
+            for (int x = 0; x < xres; ++x)
             {
-                for (int y = 0; y < YRes; ++y)
+                for (int y = 0; y < yres; ++y)
                 {
                     RenderColor color = renderer.State.Pixels[x, y];
                     System.Drawing.Color bmpColor = System.Drawing.Color.FromArgb(255, color.RByte, color.GByte,
@@ -87,8 +83,8 @@ namespace RTFrontend
 
             renderer = null;
 
-            this.Width = XRes;
-            this.Height = YRes;
+            this.Width = xres;
+            this.Height = yres;
         }
     }
 }

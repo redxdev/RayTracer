@@ -23,6 +23,7 @@ namespace RTLib.Scene
         {
             Vector<double> rorig = ray.Origin * InverseTransform;
             Vector<double> rdir = ray.Direction * InverseTransform;
+
             Vector<double> normal = GetNormal(null);
             
             t = -(rorig.DotProduct(normal))/(rdir.DotProduct(normal));

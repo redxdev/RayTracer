@@ -48,37 +48,21 @@ namespace RTLib.Scene
             Vector<double> rdir = ray.Direction*InverseTransform;
 
             double a = rdir.DotProduct(rdir);
-            double b = 2*rdir.DotProduct(rorig);
-            double c = rorig[0]*rorig[0] + rorig[1]*rorig[1] + rorig[2]*rorig[2] - RadiusSquared; //rorig.DotProduct(rorig) - RadiusSquared;
+            double b = 2d*rdir.DotProduct(rorig);
+            double c = rorig.DotProduct(rorig) - 1d - RadiusSquared;
 
-            double discr = b*b - 4*a*c;
+            double discr = b*b - 4d*a*c;
             if (discr <= 0)
             {
                 t = 0;
                 return false;
             }
 
-            double q = (b < 0)
-                ? -0.5d*(b - (double)Math.Sqrt(discr))
-                : -0.5d*(b + (double)Math.Sqrt(discr));
+            double discrSqrt = Math.Sqrt(discr);
+            double t0 = (-b + discrSqrt)/(2d*a);
+            double t1 = (-b - discrSqrt)/(2d*a);
 
-            double t0 = q/a;
-            double t1 = c/q;
-
-            if (t1 < 0)
-            {
-                t = 0;
-                return false;
-            }
-
-            if (t0 > t1)
-            {
-                double temp = t0;
-                t0 = t1;
-                t1 = temp;
-            }
-
-            t = (t0 < 0) ? t1 : t0;
+            t = t0 < t1 ? t0 : t1;
             return true;
         }
 
@@ -89,10 +73,8 @@ namespace RTLib.Scene
 
         public override Vector<double> GetNormal(Vector<double> point)
         {
-            Vector<double> origin = Vector<double>.Build.DenseOfArray(new double[] {0, 0, 0, 1});
-            origin *= Transform;
-            Vector<double> normal = point - origin;
-            normal /= normal.Norm(2);
+            Vector<double> normal = point*InverseTransform;
+            normal /= normal.Norm(2d);
             return normal;
         }
     }

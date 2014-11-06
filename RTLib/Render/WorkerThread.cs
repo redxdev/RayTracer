@@ -69,11 +69,13 @@ namespace RTLib.Render
             if (hitObject == null)
                 return _renderer.Context.BackgroundColor;
 
-            TraceInfo trace = new TraceInfo();
-            trace.T = tClosest;
-            trace.Raycast = ray;
-            trace.Intersection = ray.Origin + ray.Direction*tClosest;
-            trace.Raytracer = this;
+            TraceInfo trace = new TraceInfo
+            {
+                T = tClosest,
+                Raycast = ray,
+                Intersection = ray.Origin + ray.Direction*tClosest,
+                Raytracer = this
+            };
 
             return hitObject.Shade(_renderer.Context, trace);
         }

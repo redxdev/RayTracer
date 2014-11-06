@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.renderButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,23 +42,11 @@
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
-            // renderButton
-            // 
-            this.renderButton.Location = new System.Drawing.Point(15, 15);
-            this.renderButton.Margin = new System.Windows.Forms.Padding(6);
-            this.renderButton.Name = "renderButton";
-            this.renderButton.Size = new System.Drawing.Size(150, 44);
-            this.renderButton.TabIndex = 1;
-            this.renderButton.Text = "Render";
-            this.renderButton.UseVisualStyleBackColor = true;
-            this.renderButton.Click += new System.EventHandler(this.renderButton_Click);
-            // 
             // RenderWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 848);
-            this.Controls.Add(this.renderButton);
             this.Controls.Add(this.pictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -74,6 +61,5 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Button renderButton;
     }
 }

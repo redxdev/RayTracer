@@ -25,11 +25,17 @@ namespace RTLib.Util
 
         public double B { get { return _b; } set { _b = value; } }
 
-        public byte RByte { get { return (byte) (_r*255); } }
+        public byte RByte
+        {
+            get
+            {
+                return (byte) (MathHelper.Clamp(_r, 0, 1)*255);
+            }
+        }
 
-        public byte GByte { get { return (byte) (_g*255); } }
+        public byte GByte { get { return (byte) (MathHelper.Clamp(_g, 0, 1)*255); } }
 
-        public byte BByte { get { return (byte) (_b*255); } }
+        public byte BByte { get { return (byte) (MathHelper.Clamp(_b, 0, 1)*255); } }
 
         public override string ToString()
         {
