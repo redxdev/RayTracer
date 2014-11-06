@@ -48,16 +48,17 @@ namespace RTFrontend
 
             Matrix<double> om = Transformation.Translate(5, 0, -8);
             graph.Objects.AddLast(new Sphere(om, 3,
-                new ReflectionShader(0.3, new SurfaceShader(0.6, 0.01, new ColorShader(new RenderColor(0.5, 1, 0.5))))));
+                new ReflectionShader(0.3, new SurfaceShader(0.6, 20, new ColorShader(new RenderColor(0.5, 1, 0.5))))));
 
             om = Transformation.Translate(-5, 0, -2);
             graph.Objects.AddLast(new Sphere(om, 3,
-                new ReflectionShader(0.4, new SurfaceShader(0.65, 0.01, new ColorShader(new RenderColor(0.1, 0.1, 0.1))))));
+                new ReflectionShader(0.4, new SurfaceShader(0.65, 20, new ColorShader(new RenderColor(0.1, 0.1, 0.1))))));
 
             om = Transformation.Translate(0, -2, 0);
-            graph.Objects.AddLast(new Plane(om, new ReflectionShader(0.4, new SurfaceShader(0.6, 0.01, new ColorShader(new RenderColor(0.5, 0.5, 0.5))))));
+            graph.Objects.AddLast(new Plane(om,
+                new ReflectionShader(0.4, new SurfaceShader(0.6, 20, new ColorShader(new RenderColor(0.5, 0.5, 0.5))))));
 
-            om = Transformation.Translate(0, 5, 5);
+            om = Transformation.Translate(0, 2, 5);
             graph.Lights.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1)), 0.05));
 
             Context context = new Context();

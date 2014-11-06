@@ -61,6 +61,8 @@ namespace RTLib.Material
                         (1 - Diffuse)*localColor.B);
 
                 Vector<double> refl = rdir - 2d*rdir.DotProduct(normal)*normal;
+                refl /= refl.Norm(2d);
+
                 double rd = trace.Raycast.Direction.DotProduct(refl);
                 if(rd > 0)
                 {
