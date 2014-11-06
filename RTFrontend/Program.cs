@@ -12,6 +12,8 @@ namespace RTFrontend
         [STAThread]
         static void Main(string[] args)
         {
+            Console.Title = "RTFrontend Console";
+
             Application.EnableVisualStyles();
             Application.Run(new RenderWindow());
         }

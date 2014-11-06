@@ -60,7 +60,7 @@
             this.resHeight.AutoSize = true;
             this.resHeight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resHeight.Location = new System.Drawing.Point(108, 26);
-            this.resHeight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.resHeight.Margin = new System.Windows.Forms.Padding(2);
             this.resHeight.Maximum = new decimal(new int[] {
             2160,
             0,
@@ -95,7 +95,7 @@
             this.resWidth.AutoSize = true;
             this.resWidth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resWidth.Location = new System.Drawing.Point(108, 2);
-            this.resWidth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.resWidth.Margin = new System.Windows.Forms.Padding(2);
             this.resWidth.Maximum = new decimal(new int[] {
             3840,
             0,
@@ -119,9 +119,9 @@
             // 
             this.renderButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.renderButton.Location = new System.Drawing.Point(108, 178);
-            this.renderButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.renderButton.Margin = new System.Windows.Forms.Padding(2);
             this.renderButton.Name = "renderButton";
-            this.renderButton.Size = new System.Drawing.Size(103, 35);
+            this.renderButton.Size = new System.Drawing.Size(103, 41);
             this.renderButton.TabIndex = 8;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = true;
@@ -142,7 +142,7 @@
             this.threadCount.AutoSize = true;
             this.threadCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.threadCount.Location = new System.Drawing.Point(108, 128);
-            this.threadCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.threadCount.Margin = new System.Windows.Forms.Padding(2);
             this.threadCount.Minimum = new decimal(new int[] {
             1,
             0,
@@ -192,7 +192,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(213, 215);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(213, 221);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // label4
@@ -316,7 +316,7 @@
             this.saveButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.saveButton.Location = new System.Drawing.Point(3, 179);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(100, 33);
+            this.saveButton.Size = new System.Drawing.Size(100, 39);
             this.saveButton.TabIndex = 11;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -326,15 +326,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(213, 215);
+            this.ClientSize = new System.Drawing.Size(213, 221);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RenderSettingsWindow";
-            this.Text = "RenderSettingsWindow";
+            this.Text = "Render Settings";
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.threadCount)).EndInit();
