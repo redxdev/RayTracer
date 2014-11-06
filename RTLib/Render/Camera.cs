@@ -16,7 +16,7 @@ namespace RTLib.Render
         private double _fieldOfView;
         private double _angle;
 
-        public Camera(Matrix<double> transform = null, double fov = 90d, double ncp = 0.1d, double fcp = 1000d)
+        public Camera(Matrix<double> transform = null, double fov = 90d, double ncp = 0, double fcp = double.MaxValue)
             : base(transform ?? Matrix<double>.Build.SparseIdentity(4, 4))
         {
             FieldOfView = fov;

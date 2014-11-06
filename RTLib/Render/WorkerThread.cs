@@ -40,7 +40,7 @@ namespace RTLib.Render
                 Vector<double> rayDirection = cameraPos - rayOrigin;
                 rayDirection /= rayDirection.Norm(2d);
 
-                Ray ray = new Ray(rayOrigin, rayDirection, 0, _renderer.Context.RenderCamera.NearClippingPlane, _renderer.Context.RenderCamera.FarClippingPlane);
+                Ray ray = CreateRay(rayOrigin, rayDirection);
                 TraceResult? result = Trace(ray, ObjectType.Solid);
                 RenderColor color = result == null
                     ? _renderer.Context.BackgroundColor
@@ -51,8 +51,19 @@ namespace RTLib.Render
             Console.WriteLine(string.Format("Worker thread #{0} finished", _threadId));
         }
 
+        public Ray CreateRay(Vector<double> origin, Vector<double> direction, Ray previous = null)
+        {
+            return new Ray(origin, direction, previous == null ? 0 : (previous.Recursion + 1),
+                _renderer.Context.RenderCamera.NearClippingPlane, _renderer.Context.RenderCamera.FarClippingPlane);
+        }
+
         public TraceResult? Trace(Ray ray, ObjectType traceType)
         {
+            if (ray.Recursion > _renderer.Context.MaxRecursion)
+            {
+                return null;
+            }
+
             double tClosest = ray.MaxDistance;
             SceneObject hitObject = null;
 

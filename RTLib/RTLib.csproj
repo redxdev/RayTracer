@@ -46,8 +46,8 @@
   <ItemGroup>
     <Compile Include="Material\ColorShader.cs" />
     <Compile Include="Material\DelegateShader.cs" />
-    <Compile Include="Material\DiffuseShader.cs" />
     <Compile Include="Material\ReflectionShader.cs" />
+    <Compile Include="Material\DiffuseShader.cs" />
     <Compile Include="Material\SurfaceNormalShader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\Context.cs" />

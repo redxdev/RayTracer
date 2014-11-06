@@ -78,8 +78,9 @@ namespace RTLib.Scene
 
         public override Vector<double> GetNormal(Vector<double> point)
         {
-            Vector<double> normal = point*InverseTransform;
+            Vector<double> normal = point * InverseTransform;
             normal /= normal.Norm(2d);
+            normal[3] = 0;
             return normal;
         }
     }

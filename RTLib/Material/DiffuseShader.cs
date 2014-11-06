@@ -12,16 +12,15 @@ namespace RTLib.Material
 {
     public class DiffuseShader : IShader
     {
-        public DiffuseShader(double diffuse, double ambient, IShader subshader)
+        public DiffuseShader(double diffuse, IShader subshader)
         {
             Diffuse = diffuse;
-            Ambient = ambient;
             Subshader = subshader;
         }
 
         public double Diffuse { get; set; }
 
-        public double Ambient { get; set; }
+        public double Ambient { get { return 1 - Diffuse; } }
 
         public IShader Subshader { get; set; }
 

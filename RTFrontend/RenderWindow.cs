@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -45,21 +46,27 @@ namespace RTFrontend
 
             SceneGraph graph = new SceneGraph();
 
-            Matrix<double> om = Transformation.Translate(0, 0, -8);
-            graph.Objects.AddLast(new Sphere(om, 3, new DiffuseShader(0.9, 0.1, new ColorShader(new RenderColor(0.5, 0.5, 0.5)))));
+            Matrix<double> om = Transformation.Translate(5, 0, -8);
+            graph.Objects.AddLast(new Sphere(om, 3,
+                new ReflectionShader(0.3, new DiffuseShader(0.6, new ColorShader(new RenderColor(0.5, 0.5, 0.5))))));
+
+            om = Transformation.Translate(-5, 0, -2);
+            graph.Objects.AddLast(new Sphere(om, 3,
+                new ReflectionShader(0.4, new DiffuseShader(0.65, new ColorShader(new RenderColor(0.1, 0.1, 0.1))))));
+
+            om = Transformation.Translate(0, -5, 0);
+            graph.Objects.AddLast(new Plane(om, new ReflectionShader(0.2, new DiffuseShader(0.65, new ColorShader(new RenderColor(0.3, 0.3, 0.3))))));
 
             om = Transformation.Translate(0, 5, 5);
             graph.Objects.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1)), 0.1));
 
-            om = Transformation.Translate(-5, 5, 5);
-            graph.Objects.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 0, 0)), 0.14));
-
             Context context = new Context();
             context.Width = xres;
             context.Height = yres;
+            context.MaxRecursion = renderSettingsWindow.MaxRecursionDepth;
 
             Matrix<double> cm = Transformation.Translate(0, 0, 5);
-            context.RenderCamera = new Camera(cm, 90);
+            context.RenderCamera = new Camera(cm, renderSettingsWindow.FieldOfView, renderSettingsWindow.NearClippingPlane, renderSettingsWindow.FarClippingPlane);
             context.Graph = graph;
             
             renderer = new Renderer(context);
@@ -92,6 +99,36 @@ namespace RTFrontend
 
             this.Width = xres;
             this.Height = yres;
+        }
+
+        public void SaveBitmap()
+        {
+            if (pictureBox.Image == null)
+            {
+                MessageBox.Show("There's no image to save!", "Error saving bitmap", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Bitmap images (*.bmp)|*.bmp|All Files (*.*)|*.*";
+            dialog.FilterIndex = 0;
+            dialog.RestoreDirectory = true;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBox.Image.Save(dialog.FileName);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "Unable to save bitmap", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                MessageBox.Show("Saved bitmap", "Save complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
