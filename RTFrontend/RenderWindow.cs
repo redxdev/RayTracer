@@ -91,7 +91,7 @@ namespace RTFrontend
                     int pixelsFinished = pixelsLeft - newPixelsLeft;
                     pixelsLeft = newPixelsLeft;
                     lastCheckup = stopwatch.Elapsed.TotalSeconds;
-                    Console.WriteLine(string.Format("Status: {0} pixels completed in the last second, {1} to go", pixelsFinished, pixelsLeft));
+                    Console.WriteLine(string.Format("Status: {0} pixels/second, {1} left to render", pixelsFinished, pixelsLeft));
                 }
 
                 Thread.Sleep(10);
