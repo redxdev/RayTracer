@@ -46,11 +46,11 @@ namespace RTFrontend
 
             SceneGraph graph = new SceneGraph();
 
-            Matrix<double> om = Transformation.Translate(5, 0, -8);
+            Matrix<double> om = Transformation.Translate(5, 0, -15);
             graph.Objects.AddLast(new Sphere(om, 3,
                 new ReflectionShader(0.3, new SurfaceShader(0.6, 20, new ColorShader(new RenderColor(0.5, 1, 0.5))))));
 
-            om = Transformation.Translate(-5, 0, -2);
+            om = Transformation.Translate(-5, 0, -9);
             graph.Objects.AddLast(new Sphere(om, 3,
                 new ReflectionShader(0.4, new SurfaceShader(0.65, 20, new ColorShader(new RenderColor(0.1, 0.1, 0.1))))));
 
@@ -88,7 +88,7 @@ namespace RTFrontend
                     int pixelsFinished = pixelsLeft - newPixelsLeft;
                     pixelsLeft = newPixelsLeft;
                     lastCheckup = stopwatch.Elapsed.TotalSeconds;
-                    Console.WriteLine(string.Format("Status: {0} pixels completed in the last 1 seconds, {1} to go", pixelsFinished, pixelsLeft));
+                    Console.WriteLine(string.Format("Status: {0} pixels completed in the last second, {1} to go", pixelsFinished, pixelsLeft));
                 }
 
                 Thread.Sleep(10);
