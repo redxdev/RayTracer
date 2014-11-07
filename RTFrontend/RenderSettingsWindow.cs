@@ -28,6 +28,8 @@ namespace RTFrontend
 
         public bool HaltOnException { get { return haltOnException.Checked; } }
 
+        public int SampleCount { get { return (int)sampleCount.Value; } }
+
         private RenderWindow _renderWindow = null;
 
         public RenderSettingsWindow(RenderWindow rw)

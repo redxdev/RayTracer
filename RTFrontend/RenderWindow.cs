@@ -65,6 +65,7 @@ namespace RTFrontend
             context.Width = xres;
             context.Height = yres;
             context.MaxRecursion = renderSettingsWindow.MaxRecursionDepth;
+            context.SampleCount = renderSettingsWindow.SampleCount;
 
             Matrix<double> cm = Transformation.Translate(0, 0, 5);
             context.RenderCamera = new Camera(cm, renderSettingsWindow.FieldOfView, renderSettingsWindow.NearClippingPlane, renderSettingsWindow.FarClippingPlane);

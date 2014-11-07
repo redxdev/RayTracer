@@ -63,6 +63,8 @@ namespace RTLib.Render
 
         public int MaxRecursion { get; set; }
 
+        public int SampleCount { get; set; }
+
         public Camera RenderCamera { get; set; }
 
         public SceneGraph Graph { get; set; }

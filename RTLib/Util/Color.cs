@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,11 @@ namespace RTLib.Util
         public static RenderColor operator *(RenderColor a, RenderColor b)
         {
             return new RenderColor(a.R * b.R, a.G * b.G, a.B * b.B);
+        }
+
+        public static RenderColor operator /(RenderColor color, double val)
+        {
+            return color*(1/val);
         }
 
         public static RenderColor operator +(RenderColor a, RenderColor b)
