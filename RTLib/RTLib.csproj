@@ -49,6 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Flow\Language\FlowLang.g4.lexer.cs">
+      <DependentUpon>FlowLang.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Flow\Language\FlowLang.g4.parser.cs">
+      <DependentUpon>FlowLang.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Flow\Language\FlowLangErrorListener.cs" />
+    <Compile Include="Flow\Language\FlowLanguageException.cs" />
+    <Compile Include="Flow\Language\LanguageUtilities.cs" />
     <Compile Include="Material\ColorShader.cs" />
     <Compile Include="Material\DelegateShader.cs" />
     <Compile Include="Material\ReflectionShader.cs" />
@@ -75,10 +84,12 @@
     <Compile Include="Util\Math.cs" />
     <Compile Include="Util\Transformation.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Flow\Language\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Antlr4 Include="Flow\Language\FlowLang.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>RTLib.Flow.Language</CustomToolNamespace>
+    </Antlr4>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

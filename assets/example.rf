@@ -1,21 +1,12 @@
 // Flow Scene File
 
-// Directives begin with a pound sign and are made up of
-// a command and it's arguments. Generally these relate
-// to the flow language itself rather than the scene.
-//
-// Flow scenes must always have a "flow" directive with
-// a version number. This corresponds to the language
-// version.
-#flow 1.0
-
 // Most of a flow scene file is made up of definitions for
 // objects and materials.
 //
 // Contexts are use by the renderer to decide how to render
 // the scene. The renderer will generally display all defined
 // contexts as options for the user.
-context 480.lq Context {
+context c480.lq Context {
 	Width = 640,
 	Height = 480,
 	BackgroundColor = (0.392, 0.584, 0.929),
