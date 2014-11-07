@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RTLib.Flow.Language;
 
 namespace RTFrontend
 {
@@ -24,10 +23,6 @@ namespace RTFrontend
         [STAThread]
         public static void Main(string[] args)
         {
-            LanguageUtilities.ParseFile("../../../assets/example.rf");
-            Console.ReadKey();
-            return;
-
             Console.Title = "RTFrontend Console";
             Console.CancelKeyPress += ConsoleCancelHandler;
 
