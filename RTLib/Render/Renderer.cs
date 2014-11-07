@@ -65,6 +65,7 @@ namespace RTLib.Render
             }
 
             Console.WriteLine("Aborted rendering threads");
+            Console.WriteLine("Rendering cancelled.");
         }
     }
 }

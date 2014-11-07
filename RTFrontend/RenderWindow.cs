@@ -33,6 +33,8 @@ namespace RTFrontend
             renderSettingsWindow.Show();
         }
 
+        public Renderer Renderer { get { return _renderer; } }
+
         public void DoRender()
         {
             if (_renderer != null)
@@ -59,7 +61,7 @@ namespace RTFrontend
                 new ReflectionShader(0, new SurfaceShader(0.6, 10, new ColorShader(new RenderColor(0.5, 0.5, 0.5))))));
 
             om = Transformation.Translate(0, 2, 5);
-            graph.Lights.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1)), 0.6));
+            graph.Lights.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1))));
 
             Context context = new Context
             {
@@ -75,26 +77,22 @@ namespace RTFrontend
 
             _renderer = new Renderer(context);
 
-            double lastCheckup = 0d;
             int pixelsLeft = 0;
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
             _renderer.StartRender(renderSettingsWindow.ThreadCount, renderSettingsWindow.HaltOnException);
+            pixelsLeft = _renderer.State.JobsLeft;
 
             while (!_renderer.IsFinished)
             {
-                if(stopwatch.Elapsed.TotalSeconds - lastCheckup > 1d)
-                {
-                    int newPixelsLeft = _renderer.State.JobsLeft;
-                    int pixelsFinished = pixelsLeft - newPixelsLeft;
-                    pixelsLeft = newPixelsLeft;
-                    lastCheckup = stopwatch.Elapsed.TotalSeconds;
-                    Console.WriteLine(string.Format("Status: {0} pixels/second, {1} left to render", pixelsFinished, pixelsLeft));
-                }
+                int newPixelsLeft = _renderer.State.JobsLeft;
+                int pixelsFinished = pixelsLeft - newPixelsLeft;
+                pixelsLeft = newPixelsLeft;
+                Console.WriteLine(string.Format("Status: {0} pixels/second, {1} left to render", pixelsFinished, pixelsLeft));
 
-                Thread.Sleep(10);
+                Thread.Sleep(1000);
             }
 
             stopwatch.Stop();

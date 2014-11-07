@@ -72,7 +72,7 @@ namespace RTLib.Render
         public override string ToString()
         {
             return string.Format(
-                "{0}x{1} (r. {2}), mrd {3}, {4}x AA",
+                "{0}x{1} (r. {2}), mrd {3}, {4}xAA",
                 Width,
                 Height,
                 AspectRatio,
