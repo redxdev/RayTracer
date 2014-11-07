@@ -90,7 +90,8 @@ namespace RTFrontend
                 int newPixelsLeft = _renderer.State.JobsLeft;
                 int pixelsFinished = pixelsLeft - newPixelsLeft;
                 pixelsLeft = newPixelsLeft;
-                Console.WriteLine(string.Format("Status: {0} pixels/second, {1} left to render", pixelsFinished, pixelsLeft));
+                double timeLeft = pixelsLeft/(double) pixelsFinished;
+                Console.WriteLine(string.Format("Status: {0} pixels/second, {1} left to render, ~{2:0.00} seconds left", pixelsFinished, pixelsLeft, timeLeft));
 
                 Thread.Sleep(1000);
             }
