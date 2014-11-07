@@ -97,7 +97,7 @@ namespace RTLib.Render
         public Ray CreateRay(Vector<double> origin, Vector<double> direction, Ray previous = null)
         {
             return new Ray(origin, direction, previous == null ? 0 : (previous.Recursion + 1),
-                _renderer.Context.RenderCamera.NearClippingPlane, _renderer.Context.RenderCamera.FarClippingPlane);
+                _renderer.Context.RenderCamera.NearClipPlane, _renderer.Context.RenderCamera.FarClipPlane);
         }
 
         public TraceResult? Trace(Ray ray)

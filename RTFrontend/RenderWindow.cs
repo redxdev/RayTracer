@@ -21,7 +21,7 @@ namespace RTFrontend
 {
     public partial class RenderWindow : Form
     {
-        private Renderer renderer = null;
+        private Renderer _renderer = null;
 
         private RenderSettingsWindow renderSettingsWindow = null;
 
@@ -35,7 +35,7 @@ namespace RTFrontend
 
         public void DoRender()
         {
-            if (renderer != null)
+            if (_renderer != null)
                 return;
 
             int xres = renderSettingsWindow.XRes;
@@ -50,7 +50,7 @@ namespace RTFrontend
             graph.Objects.AddLast(new Sphere(om, 3,
                 new ReflectionShader(0.3, new SurfaceShader(0.6, 20, new ColorShader(new RenderColor(0.5, 1, 0.5))))));
 
-            om = Transformation.Translate(-5, 0, -9);
+            om = Transformation.Scale(2, 1, 1)*Transformation.Translate(-5, 0, -9);
             graph.Objects.AddLast(new Sphere(om, 3,
                 new ReflectionShader(0.4, new SurfaceShader(0.65, 20, new ColorShader(new RenderColor(0.1, 0.1, 0.1))))));
 
@@ -61,17 +61,19 @@ namespace RTFrontend
             om = Transformation.Translate(0, 2, 5);
             graph.Lights.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1)), 0.6));
 
-            Context context = new Context();
-            context.Width = xres;
-            context.Height = yres;
-            context.MaxRecursion = renderSettingsWindow.MaxRecursionDepth;
-            context.SampleCount = renderSettingsWindow.SampleCount;
+            Context context = new Context
+            {
+                Width = xres,
+                Height = yres,
+                MaxRecursion = renderSettingsWindow.MaxRecursionDepth,
+                SampleCount = renderSettingsWindow.SampleCount
+            };
 
             Matrix<double> cm = Transformation.Translate(0, 0, 5);
             context.RenderCamera = new Camera(cm, renderSettingsWindow.FieldOfView, renderSettingsWindow.NearClippingPlane, renderSettingsWindow.FarClippingPlane);
             context.Graph = graph;
 
-            renderer = new Renderer(context);
+            _renderer = new Renderer(context);
 
             double lastCheckup = 0d;
             int pixelsLeft = 0;
@@ -79,13 +81,13 @@ namespace RTFrontend
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            renderer.StartRender(renderSettingsWindow.ThreadCount, renderSettingsWindow.HaltOnException);
+            _renderer.StartRender(renderSettingsWindow.ThreadCount, renderSettingsWindow.HaltOnException);
 
-            while (!renderer.IsFinished)
+            while (!_renderer.IsFinished)
             {
                 if(stopwatch.Elapsed.TotalSeconds - lastCheckup > 1d)
                 {
-                    int newPixelsLeft = renderer.State.JobsLeft;
+                    int newPixelsLeft = _renderer.State.JobsLeft;
                     int pixelsFinished = pixelsLeft - newPixelsLeft;
                     pixelsLeft = newPixelsLeft;
                     lastCheckup = stopwatch.Elapsed.TotalSeconds;
@@ -102,14 +104,14 @@ namespace RTFrontend
             {
                 for (int y = 0; y < yres; ++y)
                 {
-                    RenderColor color = renderer.State.Pixels[x, y];
+                    RenderColor color = _renderer.State.Pixels[x, y];
                     System.Drawing.Color bmpColor = System.Drawing.Color.FromArgb(255, color.RByte, color.GByte,
                         color.BByte);
                     bitmap.SetPixel(x, y, bmpColor);
                 }
             }
 
-            renderer = null;
+            _renderer = null;
 
             this.Width = xres;
             this.Height = yres;

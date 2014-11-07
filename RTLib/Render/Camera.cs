@@ -20,8 +20,8 @@ namespace RTLib.Render
             : base(transform ?? Matrix<double>.Build.SparseIdentity(4, 4))
         {
             FieldOfView = fov;
-            NearClippingPlane = ncp;
-            FarClippingPlane = fcp;
+            NearClipPlane = ncp;
+            FarClipPlane = fcp;
         }
 
         public double FieldOfView
@@ -39,8 +39,8 @@ namespace RTLib.Render
 
         public double Angle { get { return _angle; } }
 
-        public double NearClippingPlane { get; set; }
+        public double NearClipPlane { get; set; }
 
-        public double FarClippingPlane { get; set; }
+        public double FarClipPlane { get; set; }
     }
 }

@@ -13,15 +13,13 @@ namespace RTLib.Material
 {
     public class ReflectionShader : IShader
     {
-        public ReflectionShader(double reflection, IShader subshader)
+        public ReflectionShader(double reflectitity, IShader subshader)
         {
-            Reflection = reflection;
+            Reflectivity = reflectitity;
             Subshader = subshader;
         }
 
-        public double Reflection { get; set; }
-
-        public double RI { get { return 1 - Reflection; } }
+        public double Reflectivity { get; set; }
 
         public IShader Subshader { get; set; }
 
@@ -51,7 +49,7 @@ namespace RTLib.Material
 
             RenderColor lcol = Subshader.RunShader(obj, context, trace);
 
-            return Reflection*lcol*rcol + RI*lcol;
+            return Reflectivity*lcol*rcol + (1 - Reflectivity)*lcol;
         }
     }
 }
