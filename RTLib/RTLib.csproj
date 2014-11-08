@@ -49,7 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Flow\ContextModule.cs" />
+    <Compile Include="Flow\Modules\CameraModule.cs" />
+    <Compile Include="Flow\Modules\ContextModule.cs" />
     <Compile Include="Flow\FlowException.cs" />
     <Compile Include="Flow\FlowUtilities.cs" />
     <Compile Include="Flow\IFlowModule.cs" />
@@ -64,6 +65,9 @@
     <Compile Include="Flow\Language\FlowLangErrorListener.cs" />
     <Compile Include="Flow\Language\FlowLanguageException.cs" />
     <Compile Include="Flow\Language\LanguageUtilities.cs" />
+    <Compile Include="Flow\Modules\TransformModule.cs" />
+    <Compile Include="Flow\RawValue.cs" />
+    <Compile Include="Flow\VariableValue.cs" />
     <Compile Include="Material\ColorShader.cs" />
     <Compile Include="Material\DelegateShader.cs" />
     <Compile Include="Material\ReflectionShader.cs" />
