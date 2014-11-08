@@ -4,11 +4,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Complex;
 
 namespace RTLib.Util
 {
     public struct RenderColor
     {
+        public static RenderColor FromVector(Vector<double> vector)
+        {
+            if(vector.Count < 3)
+                throw new InvalidCastException("Cannot convert a vector of < 3 size to a RenderCollor");
+
+            return new RenderColor(vector[0], vector[1], vector[2]);
+        }
+
         public static RenderColor operator *(RenderColor color, double val)
         {
             return new RenderColor(color._r*val, color._g*val, color._b*val);

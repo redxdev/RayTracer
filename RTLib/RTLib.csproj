@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Flow\ContextModule.cs" />
+    <Compile Include="Flow\FlowException.cs" />
+    <Compile Include="Flow\FlowUtilities.cs" />
+    <Compile Include="Flow\IFlowModule.cs" />
+    <Compile Include="Flow\FlowScene.cs" />
+    <Compile Include="Flow\IFlowValue.cs" />
     <Compile Include="Flow\Language\FlowLang.g4.lexer.cs">
       <DependentUpon>FlowLang.g4</DependentUpon>
     </Compile>

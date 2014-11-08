@@ -33,13 +33,13 @@ cmd_scene
 module
 	:	
 		IDENT BLOCK_BEGIN
-	(	module_entry
-		(ARG_SEPARATOR module_entry)*
+	(	module_parameter
+		(ARG_SEPARATOR module_parameter)*
 	)?
 		BLOCK_END
 	;
 
-module_entry
+module_parameter
 	:	IDENT EQUAL value
 	;
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RTLib.Flow.Language
 {
     [Serializable]
-    public class FlowLanguageException : Exception
+    public class FlowLanguageException : FlowException
     {
         public FlowLanguageException()
             : base()
