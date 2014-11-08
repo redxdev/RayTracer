@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Complex;
 using RTLib.Render;
 using RTLib.Util;
 
-namespace RTLib.Flow
+namespace RTLib.Flow.Modules
 {
     public class ContextModule : IFlowModule
     {
@@ -28,8 +23,8 @@ namespace RTLib.Flow
             SceneContext.SampleCount =
                 (int) FlowUtilities.BuildParameter<double>(scene, parameters, "SampleCount", false, 1);
 
-            Matrix<double> cameraTransform = 
-            SceneContext.RenderCamera = new Camera();
+            SceneContext.RenderCamera =
+                FlowUtilities.BuildParameter<CameraModule>(scene, parameters, "Camera").RenderCamera;
         }
     }
 }

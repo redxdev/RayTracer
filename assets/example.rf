@@ -13,6 +13,7 @@ context c480.lq Context {
 	MaxRecursion = 2,
 	SampleCount = 1,
 	Camera = Camera {
+		Transform = Util.Transform {},
 		FieldOfView = 90,
 		NearClipPlane = 0,
 		FarClipPlane = 1000

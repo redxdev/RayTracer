@@ -46,7 +46,7 @@ module_parameter
 tuple
 	:	GROUP_BEGIN
 	(	value
-		(ARG_SEPARATOR value)*
+		(ARG_SEPARATOR NUMBER)*
 	)?
 		GROUP_END
 	;
