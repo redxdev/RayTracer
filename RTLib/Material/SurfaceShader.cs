@@ -29,7 +29,7 @@ namespace RTLib.Material
         {
             SceneObject obj = spatial as SceneObject;
             if (obj == null)
-                throw new InvalidCastException("DiffuseShader can only be applied to SceneObjects");
+                throw new InvalidCastException("SurfaceShader can only be applied to SceneObjects");
 
             Vector<double> normal = obj.GetNormal(trace.Intersection);
 

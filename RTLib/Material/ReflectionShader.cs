@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Complex;
 using RTLib.Render;
 using RTLib.Scene;
 using RTLib.Util;
@@ -13,9 +12,9 @@ namespace RTLib.Material
 {
     public class ReflectionShader : IShader
     {
-        public ReflectionShader(double reflectitity, IShader subshader)
+        public ReflectionShader(double reflectivity, IShader subshader)
         {
-            Reflectivity = reflectitity;
+            Reflectivity = reflectivity;
             Subshader = subshader;
         }
 
