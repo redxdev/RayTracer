@@ -26,13 +26,19 @@ namespace RTLib.Flow.Modules
             Vector<double> rotation = FlowUtilities.BuildParameter<Vector<double>>(scene, parameters, "Rotation", false,
                 null);
 
-            Vector<double> scale = FlowUtilities.BuildParameter<Vector<double>>(scene, parameters, "Scale", false, Vector<double>.Build.Sparse(3));
+            Vector<double> scale = FlowUtilities.BuildParameter<Vector<double>>(scene, parameters, "Scale", false, Vector<double>.Build.Dense(3, 1d));
 
             Vector<double> position = FlowUtilities.BuildParameter<Vector<double>>(scene, parameters, "Position", false,
                 Vector<double>.Build.Sparse(3));
 
             if (rotation != null)
             {
+                // convert from degrees to radians
+                for (int i = 0; i < 3; ++i)
+                {
+                    rotation[i] = Math.PI*rotation[i]/180.0;
+                }
+
                 helper.Transform= Transformation.RotateX(rotation[0])*Transformation.RotateY(rotation[1])*
                             Transformation.RotateZ(rotation[2]);
                 helper.ManualInverseTransform = Transformation.RotateX(-rotation[0])*Transformation.RotateY(-rotation[1])*

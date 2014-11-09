@@ -52,7 +52,6 @@
     <Compile Include="Flow\Modules\ColorShaderModule.cs" />
     <Compile Include="Flow\Modules\IModuleBuilder.cs" />
     <Compile Include="Flow\Modules\CameraModule.cs" />
-    <Compile Include="Flow\Modules\ContextModule.cs" />
     <Compile Include="Flow\FlowException.cs" />
     <Compile Include="Flow\FlowUtilities.cs" />
     <Compile Include="Flow\FlowScene.cs" />
@@ -66,6 +65,8 @@
     <Compile Include="Flow\Language\FlowLangErrorListener.cs" />
     <Compile Include="Flow\Language\FlowLanguageException.cs" />
     <Compile Include="Flow\Modules\ModuleAttribute.cs" />
+    <Compile Include="Flow\Modules\PlanePrimitiveModule.cs" />
+    <Compile Include="Flow\Modules\PointLightModule.cs" />
     <Compile Include="Flow\Modules\ReflectionShaderModule.cs" />
     <Compile Include="Flow\Modules\SpherePrimitiveModule.cs" />
     <Compile Include="Flow\Modules\SurfaceShaderModule.cs" />

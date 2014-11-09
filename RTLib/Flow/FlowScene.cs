@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RTLib.Flow.Modules;
+using RTLib.Render;
+using RTLib.Scene;
 
 namespace RTLib.Flow
 {
@@ -41,6 +43,38 @@ namespace RTLib.Flow
             }
 
             Variables.Add(name, value);
+        }
+
+        public SceneGraph BuildGraph()
+        {
+            SceneGraph graph = new SceneGraph();
+
+            foreach (IFlowValue value in Variables.Values)
+            {
+                object obj = value.GetValue(this);
+                if (obj is SceneObject)
+                {
+                    graph.Objects.AddLast((SceneObject) obj);
+                }
+                else if (obj is Light)
+                {
+                    graph.Lights.AddLast((Light) obj);
+                }
+            }
+
+            return graph;
+        }
+
+        public Camera BuildCamera()
+        {
+            foreach (IFlowValue value in Variables.Values)
+            {
+                object obj = value.GetValue(this);
+                if (obj is Camera)
+                    return (Camera) obj;
+            }
+
+            return null;
         }
     }
 }

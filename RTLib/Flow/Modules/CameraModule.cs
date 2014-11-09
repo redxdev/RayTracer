@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RTLib.Render;
+using RTLib.Util;
 
 namespace RTLib.Flow.Modules
 {
@@ -20,7 +21,7 @@ namespace RTLib.Flow.Modules
             Camera renderCamera = new Camera();
 
             TransformHelper transform = FlowUtilities.BuildParameter<TransformHelper>(scene, parameters,
-                "Transform");
+                "Transform", false, new TransformHelper() {Transform = Transformation.Translate(0, 0, 0)});
 
             renderCamera.Transform = transform.Transform;
             if (transform.ManualInverseTransform != null)
@@ -28,10 +29,6 @@ namespace RTLib.Flow.Modules
                 renderCamera.ManualInverse = true;
                 renderCamera.InverseTransform = transform.ManualInverseTransform;
             }
-
-            renderCamera.FieldOfView = FlowUtilities.BuildParameter<double>(scene, parameters, "FieldOfView");
-            renderCamera.NearClipPlane = FlowUtilities.BuildParameter<double>(scene, parameters, "NearClipPlane");
-            renderCamera.FarClipPlane = FlowUtilities.BuildParameter<double>(scene, parameters, "FarClipPlane");
 
             return new GenericValue<Camera>() {Value = renderCamera};
         }

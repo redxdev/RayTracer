@@ -24,8 +24,6 @@ namespace RTFrontend
         [STAThread]
         public static void Main(string[] args)
         {
-            FlowScene testScene = FlowUtilities.ParseFile("../../../assets/example.rf");
-
             Console.Title = "RTFrontend Console";
             Console.CancelKeyPress += ConsoleCancelHandler;
 

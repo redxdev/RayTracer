@@ -79,7 +79,7 @@ namespace RTLib.Render
                 catch(Exception e)
                 {
                     if(lastException == null || lastException.GetType() != e.GetType() || lastException.Message != e.Message)
-                        Console.WriteLine(string.Format("Worker thread #{0} encounterd an exception: {1}", _threadId, e.Message));
+                        Console.WriteLine(string.Format("Worker thread #{0} encounterd an exception: {1}", _threadId, e));
 
                     lastException = e;
 

@@ -79,6 +79,11 @@ tuple returns [IFlowValue Value]
 		GROUP_END
 	{
 		Vector<double> vector = Vector<double>.Build.Dense(values.Count);
+		for(int i = 0; i < values.Count; ++i)
+		{
+			vector[i] = values[i];
+		}
+
 		$Value = new GenericValue<Vector<double>>() {Value = vector};
 	}
 	;

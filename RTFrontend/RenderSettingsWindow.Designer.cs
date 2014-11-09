@@ -359,7 +359,7 @@
             this.sampleCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sampleCount.Location = new System.Drawing.Point(124, 202);
             this.sampleCount.Maximum = new decimal(new int[] {
-            128,
+            144,
             0,
             0,
             0});

@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathNet.Numerics.LinearAlgebra;
+using RTLib.Flow;
 using RTLib.Material;
 using RTLib.Render;
 using RTLib.Scene;
@@ -40,40 +41,49 @@ namespace RTFrontend
             if (_renderer != null)
                 return;
 
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Render Flow (*.rf)|*.rf|All Files (*.*)|*.*";
+            dialog.FilterIndex = 0;
+            dialog.RestoreDirectory = true;
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                MessageBox.Show("A scene file must be loaded to use the renderer!", "Unable to render scene",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            FlowScene flow = null;
+            try
+            {
+                flow = FlowUtilities.ParseFile(dialog.FileName);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Unable to load scene file: " + e.Message, "Unable to render scene",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e);
+                return;
+            }
+
             int xres = renderSettingsWindow.XRes;
             int yres = renderSettingsWindow.YRes;
 
             Bitmap bitmap = new Bitmap(xres, yres);
             pictureBox.Image = bitmap;
 
-            SceneGraph graph = new SceneGraph();
-
-            Matrix<double> om = Transformation.Translate(5, 0, -15);
-            graph.Objects.AddLast(new Sphere(om, 3,
-                new ReflectionShader(0.3, new SurfaceShader(0.6, 10, new ColorShader(new RenderColor(0.5, 1, 0.5))))));
-
-            om = Transformation.Translate(-5, 0, -9);
-            graph.Objects.AddLast(new Sphere(om, 3,
-                new ReflectionShader(0.4, new SurfaceShader(0.65, 10, new ColorShader(new RenderColor(0.1, 0.1, 0.1))))));
-
-            om = Transformation.Translate(0, -5, 0);
-            graph.Objects.AddLast(new Plane(om,
-                new ReflectionShader(0, new SurfaceShader(0.6, 10, new ColorShader(new RenderColor(0.5, 0.5, 0.5))))));
-
-            om = Transformation.Translate(0, 2, 5);
-            graph.Lights.AddLast(new PointLight(om, new ColorShader(new RenderColor(1, 1, 1))));
-
             Context context = new Context
             {
                 Width = xres,
                 Height = yres,
                 MaxRecursion = renderSettingsWindow.MaxRecursionDepth,
-                SampleCount = renderSettingsWindow.SampleCount
+                SampleCount = renderSettingsWindow.SampleCount,
+                RenderCamera = flow.BuildCamera(),
+                Graph = flow.BuildGraph()
             };
 
-            Matrix<double> cm = Transformation.Translate(0, 0, 5);
-            context.RenderCamera = new Camera(cm, renderSettingsWindow.FieldOfView, renderSettingsWindow.NearClippingPlane, renderSettingsWindow.FarClippingPlane);
-            context.Graph = graph;
+            context.RenderCamera.FieldOfView = renderSettingsWindow.FieldOfView;
+            context.RenderCamera.NearClipPlane = renderSettingsWindow.NearClippingPlane;
+            context.RenderCamera.FarClipPlane = renderSettingsWindow.FarClippingPlane;
 
             _renderer = new Renderer(context);
 
