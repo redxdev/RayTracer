@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RTLib.Flow
 {
-    public class RawValue : IFlowValue
+    public class GenericValue<T> : IFlowValue
     {
-        public object Value { get; set; }
+        public T Value { get; set; }
 
         public object GetValue(FlowScene scene)
         {
