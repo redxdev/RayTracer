@@ -5,20 +5,22 @@ using RTLib.Util;
 
 namespace RTLib.Flow.Modules
 {
-    public class TransformModule : IFlowModule
+    public class TransformHelper
     {
         public Matrix<double> Transform { get; set; }
-
         public Matrix<double> ManualInverseTransform { get; set; } 
+    }
 
+    public class TransformModule : IModuleBuilder
+    {
         public TransformModule()
         {
-            Transform = Transformation.Translate(0, 0, 0);
-            ManualInverseTransform = null;
         }
 
-        public void BuildModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
+        public IFlowValue CreateModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
         {
+            TransformHelper helper = new TransformHelper() {Transform = null, ManualInverseTransform = null};
+
             bool useManual = false;
             Vector<double> rotation = FlowUtilities.BuildParameter<Vector<double>>(scene, parameters, "Rotation", false,
                 null);
@@ -30,22 +32,24 @@ namespace RTLib.Flow.Modules
 
             if (rotation != null)
             {
-                Transform = Transformation.RotateX(rotation[0])*Transformation.RotateY(rotation[1])*
+                helper.Transform= Transformation.RotateX(rotation[0])*Transformation.RotateY(rotation[1])*
                             Transformation.RotateZ(rotation[2]);
-                ManualInverseTransform = Transformation.RotateX(-rotation[0])*Transformation.RotateY(-rotation[1])*
+                helper.ManualInverseTransform = Transformation.RotateX(-rotation[0])*Transformation.RotateY(-rotation[1])*
                                          Transformation.RotateZ(-rotation[2]);
 
-                Transform *= Transformation.Scale(scale[0], scale[1], scale[2]);
-                ManualInverseTransform *= Transformation.Scale(scale[0], scale[1], scale[2]).Inverse();
+                helper.Transform *= Transformation.Scale(scale[0], scale[1], scale[2]);
+                helper.ManualInverseTransform *= Transformation.Scale(scale[0], scale[1], scale[2]).Inverse();
 
-                Transform *= Transformation.Translate(position[0], position[1], position[2]);
-                Transform *= Transformation.Translate(position[0], position[1], position[2]).Inverse();
+                helper.Transform *= Transformation.Translate(position[0], position[1], position[2]);
+                helper.Transform *= Transformation.Translate(position[0], position[1], position[2]).Inverse();
             }
             else
             {
-                Transform = Transformation.Scale(scale[0], scale[1], scale[2]);
-                Transform *= Transformation.Translate(position[0], position[1], position[2]);
+                helper.Transform = Transformation.Scale(scale[0], scale[1], scale[2]);
+                helper.Transform *= Transformation.Translate(position[0], position[1], position[2]);
             }
+
+            return new GenericValue<TransformHelper>() {Value = helper};
         }
     }
 }

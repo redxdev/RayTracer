@@ -9,19 +9,37 @@ namespace RTLib.Flow
 {
     public class FlowScene
     {
-        public IDictionary<string, IFlowValue> Variables = new Dictionary<string, IFlowValue>();
+        private IDictionary<string, IModuleBuilder> moduleBuilders = new Dictionary<string, IModuleBuilder>();
 
-        public IDictionary<string, ContextModule> Contexts = new Dictionary<string, ContextModule>();
+        private IDictionary<string, IFlowValue> variables = new Dictionary<string, IFlowValue>();
 
-        public void AddContext(string name, ContextModule module)
+        public IDictionary<string, IFlowValue> Variables { get { return variables; } }
+
+        private IDictionary<string, IModuleBuilder> ModuleBuilders { get { return moduleBuilders; } }
+
+        public void RegisterModuelBuilder(IModuleBuilder builder)
         {
-            GenericValue<ContextModule> value = new GenericValue<ContextModule>() {Value = module};
-            Variables.Add(name, value);
-            Contexts.Add(name, module);
+            ModuleBuilders.Add(builder.GetModuleName(), builder);
+        }
+
+        public IFlowValue CreateModule(string moduleName, IDictionary<string, IFlowValue> parameters)
+        {
+            IModuleBuilder builder;
+            if (!ModuleBuilders.TryGetValue(moduleName, out builder))
+            {
+                throw new KeyNotFoundException(string.Format("Unknown module \"{0}\"", moduleName));
+            }
+
+            return builder.CreateModule(this, parameters);
         }
 
         public void AddVariable(string name, IFlowValue value)
         {
+            if (Variables.ContainsKey(name))
+            {
+                throw new FlowException(string.Format("Variable {0} already exists!", name));
+            }
+
             Variables.Add(name, value);
         }
     }

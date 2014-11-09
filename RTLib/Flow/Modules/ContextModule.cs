@@ -5,26 +5,29 @@ using RTLib.Util;
 
 namespace RTLib.Flow.Modules
 {
-    public class ContextModule : IFlowModule
+    public class ContextModule : IModuleBuilder
     {
-        public Context SceneContext { get; set; }
-
-        public void BuildModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
+        public string GetModuleName()
         {
-            SceneContext = new Context();
+            return "Context";
+        }
 
-            SceneContext.Width = (int) FlowUtilities.BuildParameter<double>(scene, parameters, "Width");
-            SceneContext.Height = (int) FlowUtilities.BuildParameter<double>(scene, parameters, "Height");
+        public IFlowValue CreateModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
+        {
+            Context sceneContext = new Context();
 
-            SceneContext.BackgroundColor =
+            sceneContext.Width = (int) FlowUtilities.BuildParameter<double>(scene, parameters, "Width");
+            sceneContext.Height = (int) FlowUtilities.BuildParameter<double>(scene, parameters, "Height");
+
+            sceneContext.BackgroundColor =
                 RenderColor.FromVector(FlowUtilities.BuildParameter<Vector<double>>(scene, parameters, "BackgroundColor",
                     false, Vector<double>.Build.DenseOfArray(new double[] {0.392d, 0.584d, 0.929d})));
 
-            SceneContext.SampleCount =
+            sceneContext.SampleCount =
                 (int) FlowUtilities.BuildParameter<double>(scene, parameters, "SampleCount", false, 1);
 
-            SceneContext.RenderCamera =
-                FlowUtilities.BuildParameter<CameraModule>(scene, parameters, "Camera").RenderCamera;
+            sceneContext.RenderCamera =
+                FlowUtilities.BuildParameter<Camera>(scene, parameters, "Camera");
         }
     }
 }

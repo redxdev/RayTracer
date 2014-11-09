@@ -1,5 +1,30 @@
 grammar FlowLang;
 
+@parser::header
+{
+	#pragma warning disable 3021
+	using RTLib.Flow;
+	using RTLib.Flow.Modules;
+}
+
+@parser::members
+{
+	protected const int EOF = Eof;
+
+	public FlowScene Scene { get; set; }
+}
+
+@lexer::header
+{
+	#pragma warning disable 3021
+}
+
+@lexer::members
+{
+	protected const int EOF = Eof;
+	protected const int HIDDEN = Hidden;
+}
+
 /*
  * Parser Rules
  */
@@ -13,21 +38,10 @@ commands
 	;
 
 command
-	:	cmd_context
-	|	cmd_material
-	|	cmd_scene
-	;
-
-cmd_context
-	:	CMD_CONTEXT IDENT value
-	;
-
-cmd_material
-	:	CMD_MATERIAL IDENT value
-	;
-
-cmd_scene
-	:	CMD_SCENE IDENT value
+	:	IDENT value
+		{
+			Scene.AddVariable($IDENT.text, $value.Value);
+		}
 	;
 
 module
@@ -43,7 +57,7 @@ module_parameter
 	:	IDENT EQUAL value
 	;
 
-tuple
+tuple returns [IFlowValue Value]
 	:	GROUP_BEGIN
 	(	value
 		(ARG_SEPARATOR NUMBER)*
@@ -51,14 +65,14 @@ tuple
 		GROUP_END
 	;
 
-value
+value returns [IFlowValue Value]
 	:
 	(
-		STRING
-	|	NUMBER
-	|	VAR_SPECIFIER IDENT
-	|	tuple
-	|	module
+		STRING { return new GenericValue<string>() {Value = $STRING.text};
+	|	NUMBER { return new GenericValue<double>() {Value = double.Parse($NUMBER.text)};
+	|	VAR_SPECIFIER IDENT { return new VariableValue() {Variable = $IDENT.text};
+	|	tuple { return $tuple.Value; }
+	|	module { return $module.Value; }
 	)
 	;
 
@@ -66,20 +80,6 @@ value
  * Lexer Rules
  */
 
-// command types
-CMD_CONTEXT
-	:	'context'
-	;
-
-CMD_MATERIAL
-	:	'material'
-	;
-
-CMD_SCENE
-	:	'scene'
-	;
-
-// language constructs
 fragment ESCAPE_SEQUENCE
 	:	'\\'
 	(

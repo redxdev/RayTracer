@@ -7,27 +7,32 @@ using RTLib.Render;
 
 namespace RTLib.Flow.Modules
 {
-    public class CameraModule : IFlowModule
+    public class CameraModule : IModuleBuilder
     {
-        public Camera RenderCamera { get; set; }
-
-        public void BuildModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
+        public string GetModuleName()
         {
-            RenderCamera = new Camera();
+            return "Camera";
+        }
 
-            TransformModule transformModule = FlowUtilities.BuildParameter<TransformModule>(scene, parameters,
+        public IFlowValue CreateModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
+        {
+            Camera renderCamera = new Camera();
+
+            TransformHelper transform = FlowUtilities.BuildParameter<TransformHelper>(scene, parameters,
                 "Transform");
 
-            RenderCamera.Transform = transformModule.Transform;
-            if (transformModule.ManualInverseTransform != null)
+            renderCamera.Transform = transform.Transform;
+            if (transform.ManualInverseTransform != null)
             {
-                RenderCamera.ManualInverse = true;
-                RenderCamera.InverseTransform = transformModule.ManualInverseTransform;
+                renderCamera.ManualInverse = true;
+                renderCamera.InverseTransform = transform.ManualInverseTransform;
             }
 
-            RenderCamera.FieldOfView = FlowUtilities.BuildParameter<double>(scene, parameters, "FieldOfView");
-            RenderCamera.NearClipPlane = FlowUtilities.BuildParameter<double>(scene, parameters, "NearClipPlane");
-            RenderCamera.FarClipPlane = FlowUtilities.BuildParameter<double>(scene, parameters, "FarClipPlane");
+            renderCamera.FieldOfView = FlowUtilities.BuildParameter<double>(scene, parameters, "FieldOfView");
+            renderCamera.NearClipPlane = FlowUtilities.BuildParameter<double>(scene, parameters, "NearClipPlane");
+            renderCamera.FarClipPlane = FlowUtilities.BuildParameter<double>(scene, parameters, "FarClipPlane");
+
+            return new GenericValue<Camera>() {Value = renderCamera};
         }
     }
 }
