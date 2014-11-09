@@ -7,6 +7,7 @@ using RTLib.Render;
 
 namespace RTLib.Flow.Modules
 {
+    [Module]
     public class CameraModule : IModuleBuilder
     {
         public string GetModuleName()

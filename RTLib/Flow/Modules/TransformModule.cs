@@ -11,17 +11,18 @@ namespace RTLib.Flow.Modules
         public Matrix<double> ManualInverseTransform { get; set; } 
     }
 
+    [Module]
     public class TransformModule : IModuleBuilder
     {
-        public TransformModule()
+        public string GetModuleName()
         {
+            return "Util.Transform";
         }
 
         public IFlowValue CreateModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
         {
             TransformHelper helper = new TransformHelper() {Transform = null, ManualInverseTransform = null};
 
-            bool useManual = false;
             Vector<double> rotation = FlowUtilities.BuildParameter<Vector<double>>(scene, parameters, "Rotation", false,
                 null);
 

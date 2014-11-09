@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace RTLib.Flow.Modules
 {
-    public interface IModuleBuilder
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class ModuleAttribute : Attribute
     {
-        string GetModuleName();
-
-        IFlowValue CreateModule(FlowScene scene, IDictionary<string, IFlowValue> parameters);
     }
 }

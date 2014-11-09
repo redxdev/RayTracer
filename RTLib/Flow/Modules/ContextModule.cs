@@ -5,6 +5,7 @@ using RTLib.Util;
 
 namespace RTLib.Flow.Modules
 {
+    [Module]
     public class ContextModule : IModuleBuilder
     {
         public string GetModuleName()
@@ -28,6 +29,8 @@ namespace RTLib.Flow.Modules
 
             sceneContext.RenderCamera =
                 FlowUtilities.BuildParameter<Camera>(scene, parameters, "Camera");
+
+            return new GenericValue<Context>() {Value = sceneContext};
         }
     }
 }

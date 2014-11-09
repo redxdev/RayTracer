@@ -6,7 +6,7 @@
 // Contexts are use by the renderer to decide how to render
 // the scene. The renderer will generally display all defined
 // contexts as options for the user.
-context c480.lq Context {
+c480.lq Context {
 	Width = 640,
 	Height = 480,
 	BackgroundColor = (0.392, 0.584, 0.929),
@@ -21,7 +21,7 @@ context c480.lq Context {
 }
 
 // This defines a material for use elsewhere.
-material example Shader.Reflection {
+example Shader.Reflection {
 	Reflectivity = 0.4,
 	Subshader = Shader.Surface {
 		Diffuse = 0.6,
@@ -34,7 +34,7 @@ material example Shader.Reflection {
 
 // This defines a scene object which will be
 // displayed by the renderer.
-scene sphere1 Primitive.Sphere {
+sphere1 Primitive.Sphere {
 	Radius = 1.0,
 	Transform = Util.Transform {
 		Position = (0, 0, -5)
@@ -44,7 +44,7 @@ scene sphere1 Primitive.Sphere {
 					  // reuse it in multiple objects.
 }
 
-scene plane1 Primitive.Plane {
+plane1 Primitive.Plane {
 	Transform = Util.Transform {
 		Position = (0, -5, 0)
 	},

@@ -17,7 +17,7 @@ namespace RTLib.Flow
 
         private IDictionary<string, IModuleBuilder> ModuleBuilders { get { return moduleBuilders; } }
 
-        public void RegisterModuelBuilder(IModuleBuilder builder)
+        public void RegisterModuleBuilder(IModuleBuilder builder)
         {
             ModuleBuilders.Add(builder.GetModuleName(), builder);
         }

@@ -12,9 +12,9 @@ namespace RTLib.Material
 {
     public class ReflectionShader : IShader
     {
-        public ReflectionShader(double reflectitity, IShader subshader)
+        public ReflectionShader(double reflectivity, IShader subshader)
         {
-            Reflectivity = reflectitity;
+            Reflectivity = reflectivity;
             Subshader = subshader;
         }
 

@@ -5,6 +5,7 @@ grammar FlowLang;
 	#pragma warning disable 3021
 	using RTLib.Flow;
 	using RTLib.Flow.Modules;
+	using MathNet.Numerics.LinearAlgebra;
 }
 
 @parser::members
@@ -44,35 +45,52 @@ command
 		}
 	;
 
-module
-	:	
+module returns [IFlowValue Value]
+	:
 		IDENT BLOCK_BEGIN
-	(	module_parameter
-		(ARG_SEPARATOR module_parameter)*
+		{ Dictionary<string, IFlowValue> parameters = new Dictionary<string, IFlowValue>(); }
+	(	first=module_parameter { parameters.Add($first.Key, $first.Value); }
+		(
+			ARG_SEPARATOR
+			n=module_parameter
+			{ parameters.Add($n.Key, $n.Value); }
+		)*
 	)?
 		BLOCK_END
+		{
+			$Value = Scene.CreateModule($IDENT.text, parameters);
+		}
 	;
 
-module_parameter
-	:	IDENT EQUAL value
+module_parameter returns [string Key, IFlowValue Value]
+	:	IDENT EQUAL value { $Key = $IDENT.text; $Value = $value.Value; }
 	;
 
 tuple returns [IFlowValue Value]
-	:	GROUP_BEGIN
-	(	value
-		(ARG_SEPARATOR NUMBER)*
+	:	{ List<double> values = new List<double>(); }
+		GROUP_BEGIN
+	(	first=NUMBER { values.Add(double.Parse($first.text)); }
+		(
+			ARG_SEPARATOR
+			n=NUMBER
+			{ values.Add(double.Parse($n.text)); }
+		)*
 	)?
 		GROUP_END
+	{
+		Vector<double> vector = Vector<double>.Build.Dense(values.Count);
+		$Value = new GenericValue<Vector<double>>() {Value = vector};
+	}
 	;
 
 value returns [IFlowValue Value]
 	:
 	(
-		STRING { return new GenericValue<string>() {Value = $STRING.text};
-	|	NUMBER { return new GenericValue<double>() {Value = double.Parse($NUMBER.text)};
-	|	VAR_SPECIFIER IDENT { return new VariableValue() {Variable = $IDENT.text};
-	|	tuple { return $tuple.Value; }
-	|	module { return $module.Value; }
+		STRING { $Value = new GenericValue<string>() {Value = $STRING.text}; }
+	|	NUMBER { $Value = new GenericValue<double>() {Value = double.Parse($NUMBER.text)};}
+	|	VAR_SPECIFIER IDENT { $Value = new VariableValue() {Variable = $IDENT.text}; }
+	|	tuple { $Value = $tuple.Value; }
+	|	module { $Value = $module.Value; }
 	)
 	;
 
