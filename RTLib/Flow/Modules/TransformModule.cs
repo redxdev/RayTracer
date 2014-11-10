@@ -48,7 +48,7 @@ namespace RTLib.Flow.Modules
                 helper.ManualInverseTransform *= Transformation.Scale(scale[0], scale[1], scale[2]).Inverse();
 
                 helper.Transform *= Transformation.Translate(position[0], position[1], position[2]);
-                helper.Transform *= Transformation.Translate(position[0], position[1], position[2]).Inverse();
+                helper.ManualInverseTransform *= Transformation.Translate(position[0], position[1], position[2]).Inverse();
             }
             else
             {

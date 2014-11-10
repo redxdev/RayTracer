@@ -22,15 +22,12 @@ reflective Shader.Reflection {
 	}
 }
 
-textured Shader.Reflection {
-	Reflectivity = 0.2,
-	Subshader = Shader.Surface {
-		Diffuse = 0.6,
-		Specular = 0.6,
-		Subshader = Shader.Texture {
-			Texture = Texture.Bitmap {
-				Path = "../textures/checkerboard.bmp"
-			}
+textured Shader.Surface {
+	Diffuse = 0.6,
+	Specular = 0.6,
+	Subshader = Shader.Texture {
+		Texture = Texture.Bitmap {
+			Path = "../textures/globe.bmp"
 		}
 	}
 }

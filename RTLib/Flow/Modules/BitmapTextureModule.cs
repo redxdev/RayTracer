@@ -21,7 +21,10 @@ namespace RTLib.Flow.Modules
         public IFlowValue CreateModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
         {
             string filepath = FlowUtilities.BuildParameter<string>(scene, parameters, "Path");
+
+            Console.WriteLine(string.Format("Loading bitmap \"{0}\"", filepath));
             Bitmap bitmap = new Bitmap(Path.Combine(scene.RelativePath, filepath));
+            Console.WriteLine(string.Format("Loaded bitmap. Binding to {0}x{1} texture...", bitmap.Width, bitmap.Height));
 
             RawTexture texture = new RawTexture();
             texture.Texture = new RenderColor[bitmap.Width, bitmap.Height];
@@ -34,6 +37,8 @@ namespace RTLib.Flow.Modules
                     texture.Texture[x, y] = RenderColor.FromColor(bitmap.GetPixel(x, y));
                 }
             }
+
+            Console.WriteLine(string.Format("Texture \"{0}\" bound.", filepath));
 
             return new GenericValue<RawTexture>() {Value = texture};
         }
