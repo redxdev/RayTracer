@@ -24,8 +24,6 @@ namespace RTLib.Material.Texture
             int tx = (int) MathHelper.Clamp(x, 0, Width - 1);
             int ty = (int) MathHelper.Clamp(y, 0, Height - 1);
 
-            Console.WriteLine(x + ", "  + y + ", " + tx + ", " + ty);
-
             return Texture[tx, ty];
         }
     }
