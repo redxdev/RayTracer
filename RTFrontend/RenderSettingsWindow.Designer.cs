@@ -45,9 +45,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.maxRecursionDepth = new System.Windows.Forms.NumericUpDown();
             this.haltOnException = new System.Windows.Forms.CheckBox();
-            this.saveButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.sampleCount = new System.Windows.Forms.NumericUpDown();
+            this.saveButton = new System.Windows.Forms.Button();
             this.liveRendering = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
@@ -124,12 +124,12 @@
             // 
             this.renderButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.renderButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.renderButton.Location = new System.Drawing.Point(123, 250);
+            this.renderButton.Location = new System.Drawing.Point(2, 250);
             this.renderButton.Margin = new System.Windows.Forms.Padding(2);
             this.renderButton.Name = "renderButton";
-            this.renderButton.Size = new System.Drawing.Size(118, 53);
+            this.renderButton.Size = new System.Drawing.Size(117, 53);
             this.renderButton.TabIndex = 10;
-            this.renderButton.Text = "Render / Cancel";
+            this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = true;
             this.renderButton.Click += new System.EventHandler(this.renderButton_Click);
             // 
@@ -186,8 +186,8 @@
             this.tableLayoutPanel1.Controls.Add(this.haltOnException, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.sampleCount, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.renderButton, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.saveButton, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.saveButton, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.renderButton, 0, 11);
             this.tableLayoutPanel1.Controls.Add(this.liveRendering, 1, 10);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -336,18 +336,6 @@
             this.haltOnException.Text = "Halt on exception";
             this.haltOnException.UseVisualStyleBackColor = true;
             // 
-            // saveButton
-            // 
-            this.saveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.saveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.saveButton.Location = new System.Drawing.Point(3, 251);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(115, 51);
-            this.saveButton.TabIndex = 11;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -379,6 +367,18 @@
             0,
             0,
             0});
+            // 
+            // saveButton
+            // 
+            this.saveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.saveButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.saveButton.Location = new System.Drawing.Point(124, 251);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(116, 51);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // liveRendering
             // 
