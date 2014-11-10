@@ -16,15 +16,24 @@ namespace RTLib.Material.Texture
 
         public RenderColor[,] Texture { get; set; }
 
+        public bool BilinearFilter { get; set; }
+
         public RenderColor GetTexel(double u, double v)
         {
-            double x = u*Width;
-            double y = v*Height;
+            if (BilinearFilter)
+            {
+                throw new NotImplementedException("Bilinear filtering is not currently supported.");
+            }
+            else
+            {
+                double x = u * Width;
+                double y = v * Height;
 
-            int tx = (int) MathHelper.Clamp(x, 0, Width - 1);
-            int ty = (int) MathHelper.Clamp(y, 0, Height - 1);
+                int tx = (int)MathHelper.Clamp(x, 0, Width - 1);
+                int ty = (int)MathHelper.Clamp(y, 0, Height - 1);
 
-            return Texture[tx, ty];
+                return Texture[tx, ty];
+            }
         }
     }
 }

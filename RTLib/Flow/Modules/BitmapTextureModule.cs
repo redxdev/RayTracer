@@ -21,6 +21,7 @@ namespace RTLib.Flow.Modules
         public IFlowValue CreateModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
         {
             string filepath = FlowUtilities.BuildParameter<string>(scene, parameters, "Path");
+            bool bilinear = FlowUtilities.BuildParameter<bool>(scene, parameters, "BilinearFilter", false, false);
 
             Console.WriteLine(string.Format("Loading bitmap \"{0}\"", filepath));
             Bitmap bitmap = new Bitmap(Path.Combine(scene.RelativePath, filepath));
@@ -30,6 +31,7 @@ namespace RTLib.Flow.Modules
             texture.Texture = new RenderColor[bitmap.Width, bitmap.Height];
             texture.Width = bitmap.Width;
             texture.Height = bitmap.Height;
+            texture.BilinearFilter = bilinear;
             for (int y = 0; y < bitmap.Height; ++y)
             {
                 for (int x = 0; x < bitmap.Width; ++x)

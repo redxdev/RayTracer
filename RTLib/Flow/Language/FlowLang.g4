@@ -92,7 +92,9 @@ value returns [IFlowValue Value]
 	:
 	(
 		STRING { $Value = new GenericValue<string>() {Value = $STRING.text}; }
-	|	NUMBER { $Value = new GenericValue<double>() {Value = double.Parse($NUMBER.text)};}
+	|	NUMBER { $Value = new GenericValue<double>() {Value = double.Parse($NUMBER.text)}; }
+	|	B_TRUE { $Value = new GenericValue<bool>() {Value = true}; }
+	|	B_FALSE { $Value = new GenericValue<bool>() {Value = false}; }
 	|	VAR_SPECIFIER IDENT { $Value = new VariableValue() {Variable = $IDENT.text}; }
 	|	tuple { $Value = $tuple.Value; }
 	|	module { $Value = $module.Value; }
@@ -132,6 +134,14 @@ NUMBER
 		[0-9]* '.' [0-9]+
 	|	[0-9]+
 	)
+	;
+
+B_TRUE
+	:	'true'
+	;
+
+B_FALSE
+	:	'false'
 	;
 
 IDENT
