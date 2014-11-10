@@ -21,6 +21,8 @@ namespace RTLib.Render
 
         private RenderColor[,] _pixels = null;
 
+        private ConcurrentQueue<RenderJob> _finishedJobQueue = new ConcurrentQueue<RenderJob>(); 
+
         public RenderState(int width, int height)
         {
             _pixels = new RenderColor[width,height];
@@ -75,6 +77,21 @@ namespace RTLib.Render
         public void FinishJob(int i, int j, RenderColor color)
         {
             _pixels[i, j] = color;
+            _finishedJobQueue.Enqueue(new RenderJob() {I = i, J = j});
+        }
+
+        public bool HasFinishedJobs()
+        {
+            return !_finishedJobQueue.IsEmpty;
+        }
+
+        public RenderJob? DequeueFinishedJob()
+        {
+            RenderJob job;
+            if (_finishedJobQueue.TryDequeue(out job))
+                return job;
+
+            return null;
         }
     }
 }

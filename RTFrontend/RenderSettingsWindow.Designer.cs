@@ -128,7 +128,7 @@
             this.renderButton.Name = "renderButton";
             this.renderButton.Size = new System.Drawing.Size(118, 50);
             this.renderButton.TabIndex = 10;
-            this.renderButton.Text = "Render";
+            this.renderButton.Text = "Render / Cancel";
             this.renderButton.UseVisualStyleBackColor = true;
             this.renderButton.Click += new System.EventHandler(this.renderButton_Click);
             // 

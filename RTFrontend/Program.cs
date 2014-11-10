@@ -16,7 +16,7 @@ namespace RTFrontend
         {
             if(renderWindow != null && renderWindow.Renderer != null)
             {
-                renderWindow.Renderer.CancelRender();
+                renderWindow.CancelRender();
                 args.Cancel = true;
             }
         }

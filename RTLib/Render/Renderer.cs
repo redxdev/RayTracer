@@ -52,6 +52,7 @@ namespace RTLib.Render
             {
                 WorkerThread worker = new WorkerThread(this, i + 1, stopWorkerOnException);
                 _threads[i] = new Thread(new ThreadStart(worker.WorkerProc));
+                _threads[i].IsBackground = true;
                 _threads[i].Start();
             }
         }

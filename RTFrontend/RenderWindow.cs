@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using RTLib.Flow;
 using RTLib.Material;
@@ -26,9 +27,18 @@ namespace RTFrontend
 
         private RenderSettingsWindow renderSettingsWindow = null;
 
+        private BackgroundWorker worker = null;
+
         public RenderWindow()
         {
             InitializeComponent();
+
+            worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            worker.DoWork += WorkerProc;
+            worker.ProgressChanged += WorkerProgressUpdate;
+            worker.RunWorkerCompleted += WorkerFinished;
 
             renderSettingsWindow = new RenderSettingsWindow(this);
             renderSettingsWindow.Show();
@@ -36,10 +46,21 @@ namespace RTFrontend
 
         public Renderer Renderer { get { return _renderer; } }
 
+        public void CancelRender()
+        {
+            if (_renderer == null)
+                return;
+
+            worker.CancelAsync();
+            _renderer.CancelRender();
+        }
+
         public void DoRender()
         {
             if (_renderer != null)
+            {
                 return;
+            }
 
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Render Flow (*.rf)|*.rf|All Files (*.*)|*.*";
@@ -65,16 +86,15 @@ namespace RTFrontend
                 return;
             }
 
-            int xres = renderSettingsWindow.XRes;
-            int yres = renderSettingsWindow.YRes;
+            _xres = renderSettingsWindow.XRes;
+            _yres = renderSettingsWindow.YRes;
 
-            Bitmap bitmap = new Bitmap(xres, yres);
-            pictureBox.Image = bitmap;
+            _bitmap = new Bitmap(_xres, _yres);
 
             Context context = new Context
             {
-                Width = xres,
-                Height = yres,
+                Width = _xres,
+                Height = _yres,
                 MaxRecursion = renderSettingsWindow.MaxRecursionDepth,
                 SampleCount = renderSettingsWindow.SampleCount,
                 RenderCamera = flow.BuildCamera(),
@@ -87,6 +107,20 @@ namespace RTFrontend
 
             _renderer = new Renderer(context);
 
+            this.Width = _xres;
+            this.Height = _yres;
+
+            this.Refresh();
+
+            worker.RunWorkerAsync();
+        }
+
+        private Bitmap _bitmap = null;
+        private int _xres = 0;
+        private int _yres = 0;
+
+        private void WorkerProc(object sender, EventArgs e)
+        {
             int pixelsLeft = 0;
 
             Stopwatch stopwatch = new Stopwatch();
@@ -95,42 +129,107 @@ namespace RTFrontend
             _renderer.StartRender(renderSettingsWindow.ThreadCount, renderSettingsWindow.HaltOnException);
             pixelsLeft = _renderer.State.JobsLeft;
 
+            double lastStatusUpdate = 0;
+
             while (!_renderer.IsFinished)
             {
-                int newPixelsLeft = _renderer.State.JobsLeft;
-                int pixelsFinished = pixelsLeft - newPixelsLeft;
-                pixelsLeft = newPixelsLeft;
-                double timeLeft = pixelsLeft/(double) pixelsFinished;
-                Console.WriteLine(string.Format(
-                    "Status: {0} pixels/second, {1} left to render, ~{2:0.00} seconds left", pixelsFinished, pixelsLeft,
-                    timeLeft));
+                if (lastStatusUpdate + 1d < stopwatch.Elapsed.TotalSeconds)
+                {
+                    lastStatusUpdate = stopwatch.Elapsed.TotalSeconds;
 
-                Thread.Sleep(1000);
+                    int newPixelsLeft = _renderer.State.JobsLeft;
+                    int pixelsFinished = pixelsLeft - newPixelsLeft;
+                    pixelsLeft = newPixelsLeft;
+                    double timeLeft = pixelsLeft / (double)pixelsFinished;
+                    Console.WriteLine(string.Format(
+                        "Status: {0} pixels/second, {1} left to render, ~{2:0.00} seconds left", pixelsFinished, pixelsLeft,
+                        timeLeft));
+                }
+
+                int left = int.MaxValue;
+                int right = 0;
+                int top = int.MaxValue;
+                int bottom = 0;
+                List<RenderJob> jobs = new List<RenderJob>();
+                while (_renderer.State.HasFinishedJobs())
+                {
+                    if (_renderer.IsFinished)
+                    {
+                        jobs.Clear();
+                        break;
+                    }
+
+                    RenderJob? job = _renderer.State.DequeueFinishedJob();
+                    if (!job.HasValue)
+                        continue;
+
+                    if (job.Value.I < left)
+                        left = job.Value.I;
+                    if (job.Value.I > right)
+                        right = job.Value.I;
+                    if (job.Value.J < top)
+                        top = job.Value.J;
+                    if (job.Value.J > bottom)
+                        bottom = job.Value.J;
+
+                    jobs.Add(job.Value);
+                }
+
+                if(jobs.Count > 0)
+                    worker.ReportProgress(0, Tuple.Create(jobs.ToArray(), new Rectangle(left, top, right - left, bottom - top)));
+
+                Thread.Sleep(10);
             }
 
             stopwatch.Stop();
             Console.WriteLine(string.Format("Rendering took {0} seconds", stopwatch.Elapsed.TotalSeconds));
+        }
 
-            for (int x = 0; x < xres; ++x)
+        private void WorkerProgressUpdate(object sender, ProgressChangedEventArgs e)
+        {
+            Tuple<RenderJob[], Rectangle> args = (Tuple<RenderJob[], Rectangle>) e.UserState;
+            RenderJob[] jobs = args.Item1;
+            foreach (RenderJob job in jobs)
             {
-                for (int y = 0; y < yres; ++y)
+                RenderColor color = _renderer.State.Pixels[job.I, job.J];
+                System.Drawing.Color bmpColor = System.Drawing.Color.FromArgb(255, color.RByte, color.GByte,
+                    color.BByte);
+
+                _bitmap.SetPixel(job.I, job.J, bmpColor);
+            }
+
+            this.Invalidate(args.Item2);
+            this.Update();
+        }
+
+        private void WorkerFinished(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Console.WriteLine("Generating final image...");
+
+            for (int x = 0; x < _xres; ++x)
+            {
+                for (int y = 0; y < _yres; ++y)
                 {
                     RenderColor color = _renderer.State.Pixels[x, y];
                     System.Drawing.Color bmpColor = System.Drawing.Color.FromArgb(255, color.RByte, color.GByte,
                         color.BByte);
-                    bitmap.SetPixel(x, y, bmpColor);
+                    _bitmap.SetPixel(x, y, bmpColor);
                 }
             }
 
             _renderer = null;
 
-            this.Width = xres;
-            this.Height = yres;
+            this.Width = _xres;
+            this.Height = _yres;
+
+            this.Refresh();
+
+            Console.WriteLine("Image generation complete.");
         }
 
         public void SaveBitmap()
         {
-            if (pictureBox.Image == null)
+            if (_bitmap == null)
             {
                 MessageBox.Show("There's no image to save!", "Error saving bitmap", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -146,7 +245,7 @@ namespace RTFrontend
             {
                 try
                 {
-                    pictureBox.Image.Save(dialog.FileName);
+                    _bitmap.Save(dialog.FileName);
                 }
                 catch (Exception e)
                 {
@@ -155,6 +254,14 @@ namespace RTFrontend
                 }
 
                 MessageBox.Show("Saved bitmap", "Save complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            if (_bitmap != null)
+            {
+                e.Graphics.DrawImage(_bitmap, 0, 0, Width, Height);
             }
         }
     }
