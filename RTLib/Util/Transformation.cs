@@ -68,7 +68,7 @@ namespace RTLib.Util
             {
                 {Math.Cos(z), -Math.Sin(z), 0, 0},
                 {Math.Sin(z), Math.Cos(z), 0, 0},
-                {0, 0, 0, 0},
+                {0, 0, 1, 0},
                 {0, 0, 0, 1}
             });
 
