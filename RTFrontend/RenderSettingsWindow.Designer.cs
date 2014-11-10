@@ -45,9 +45,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.maxRecursionDepth = new System.Windows.Forms.NumericUpDown();
             this.haltOnException = new System.Windows.Forms.CheckBox();
-            this.saveButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.sampleCount = new System.Windows.Forms.NumericUpDown();
+            this.saveButton = new System.Windows.Forms.Button();
             this.liveRendering = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
@@ -129,7 +129,7 @@
             this.renderButton.Name = "renderButton";
             this.renderButton.Size = new System.Drawing.Size(118, 53);
             this.renderButton.TabIndex = 10;
-            this.renderButton.Text = "Render / Cancel";
+            this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = true;
             this.renderButton.Click += new System.EventHandler(this.renderButton_Click);
             // 
@@ -336,18 +336,6 @@
             this.haltOnException.Text = "Halt on exception";
             this.haltOnException.UseVisualStyleBackColor = true;
             // 
-            // saveButton
-            // 
-            this.saveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.saveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.saveButton.Location = new System.Drawing.Point(3, 251);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(115, 51);
-            this.saveButton.TabIndex = 11;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -379,6 +367,18 @@
             0,
             0,
             0});
+            // 
+            // saveButton
+            // 
+            this.saveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.saveButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.saveButton.Location = new System.Drawing.Point(3, 251);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(115, 51);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // liveRendering
             // 
