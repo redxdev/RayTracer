@@ -45,7 +45,9 @@ nonreflective Shader.Surface {
 sphere1 Primitive.Sphere {
 	Shader = $textured,
 	Transform = Util.Transform {
-		Rotation = (0, 0, 0)
+		Rotation = (0, 180, 0),
+		Position = (0, 0, 0),
+		Scale = (1, 1, 1)
 	}
 }
 

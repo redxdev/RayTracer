@@ -70,6 +70,7 @@
     <Compile Include="Flow\Modules\PointLightModule.cs" />
     <Compile Include="Flow\Modules\ReflectionShaderModule.cs" />
     <Compile Include="Flow\Modules\SpherePrimitiveModule.cs" />
+    <Compile Include="Flow\Modules\SurfaceNormalShaderModule.cs" />
     <Compile Include="Flow\Modules\SurfaceShaderModule.cs" />
     <Compile Include="Flow\Modules\TextureShaderModule.cs" />
     <Compile Include="Flow\Modules\TransformModule.cs" />

@@ -41,9 +41,10 @@ namespace RTLib.Material
 
             foreach (Light light in context.Graph.Lights)
             {
-                Vector<double> ldir = Vector<double>.Build.DenseOfArray(new double[] {0, 0, 0, 1});
-                ldir *= light.Transform;
-                ldir = ldir - trace.Intersection;
+                Vector<double> lorigin = Vector<double>.Build.DenseOfArray(new double[] { 0, 0, 0, 1 });
+                lorigin *= light.Transform;
+
+                Vector<double> ldir = lorigin - trace.Intersection;
                 ldir /= ldir.Norm(2d);
 
                 double factor = normal.DotProduct(ldir);
@@ -55,8 +56,6 @@ namespace RTLib.Material
                     continue;
 
                 // shadows
-                Vector<double> lorigin = Vector<double>.Build.DenseOfArray(new double[] { 0, 0, 0, 1 });
-                lorigin *= light.Transform;
                 Ray shadowRay = trace.Raytracer.CreateRay(lorigin, -ldir, trace.Raycast);
                 double tThis = 0;
                 double tClosest = double.MaxValue;
