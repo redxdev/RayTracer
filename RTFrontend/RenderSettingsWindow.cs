@@ -30,6 +30,8 @@ namespace RTFrontend
 
         public int SampleCount { get { return (int)sampleCount.Value; } }
 
+        public bool LiveRendering { get { return liveRendering.Checked; } }
+
         private RenderWindow _renderWindow = null;
 
         public RenderSettingsWindow(RenderWindow rw)

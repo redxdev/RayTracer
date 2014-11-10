@@ -146,37 +146,41 @@ namespace RTFrontend
                         timeLeft));
                 }
 
-                int left = int.MaxValue;
-                int right = 0;
-                int top = int.MaxValue;
-                int bottom = 0;
-                List<RenderJob> jobs = new List<RenderJob>();
-                while (_renderer.State.HasFinishedJobs())
+                if (renderSettingsWindow.LiveRendering)
                 {
-                    if (_renderer.IsFinished)
+                    int left = int.MaxValue;
+                    int right = 0;
+                    int top = int.MaxValue;
+                    int bottom = 0;
+                    List<RenderJob> jobs = new List<RenderJob>();
+                    while (_renderer.State.HasFinishedJobs())
                     {
-                        jobs.Clear();
-                        break;
+                        if (_renderer.IsFinished)
+                        {
+                            jobs.Clear();
+                            break;
+                        }
+
+                        RenderJob? job = _renderer.State.DequeueFinishedJob();
+                        if (!job.HasValue)
+                            continue;
+
+                        if (job.Value.I < left)
+                            left = job.Value.I;
+                        if (job.Value.I > right)
+                            right = job.Value.I;
+                        if (job.Value.J < top)
+                            top = job.Value.J;
+                        if (job.Value.J > bottom)
+                            bottom = job.Value.J;
+
+                        jobs.Add(job.Value);
                     }
 
-                    RenderJob? job = _renderer.State.DequeueFinishedJob();
-                    if (!job.HasValue)
-                        continue;
-
-                    if (job.Value.I < left)
-                        left = job.Value.I;
-                    if (job.Value.I > right)
-                        right = job.Value.I;
-                    if (job.Value.J < top)
-                        top = job.Value.J;
-                    if (job.Value.J > bottom)
-                        bottom = job.Value.J;
-
-                    jobs.Add(job.Value);
+                    if (jobs.Count > 0)
+                        worker.ReportProgress(0,
+                            Tuple.Create(jobs.ToArray(), new Rectangle(left, top, right - left, bottom - top)));
                 }
-
-                if(jobs.Count > 0)
-                    worker.ReportProgress(0, Tuple.Create(jobs.ToArray(), new Rectangle(left, top, right - left, bottom - top)));
 
                 Thread.Sleep(10);
             }

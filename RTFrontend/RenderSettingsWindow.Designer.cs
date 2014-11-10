@@ -48,6 +48,7 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.sampleCount = new System.Windows.Forms.NumericUpDown();
+            this.liveRendering = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threadCount)).BeginInit();
@@ -123,10 +124,10 @@
             // 
             this.renderButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.renderButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.renderButton.Location = new System.Drawing.Point(123, 227);
+            this.renderButton.Location = new System.Drawing.Point(123, 250);
             this.renderButton.Margin = new System.Windows.Forms.Padding(2);
             this.renderButton.Name = "renderButton";
-            this.renderButton.Size = new System.Drawing.Size(118, 50);
+            this.renderButton.Size = new System.Drawing.Size(118, 53);
             this.renderButton.TabIndex = 10;
             this.renderButton.Text = "Render / Cancel";
             this.renderButton.UseVisualStyleBackColor = true;
@@ -183,14 +184,15 @@
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.maxRecursionDepth, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.haltOnException, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.saveButton, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.sampleCount, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.renderButton, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.renderButton, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.saveButton, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.liveRendering, 1, 10);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 11;
+            this.tableLayoutPanel1.RowCount = 12;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -202,7 +204,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(243, 276);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(243, 305);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // label4
@@ -337,9 +340,9 @@
             // 
             this.saveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.saveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.saveButton.Location = new System.Drawing.Point(3, 228);
+            this.saveButton.Location = new System.Drawing.Point(3, 251);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(115, 48);
+            this.saveButton.Size = new System.Drawing.Size(115, 51);
             this.saveButton.TabIndex = 11;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -377,11 +380,23 @@
             0,
             0});
             // 
+            // liveRendering
+            // 
+            this.liveRendering.AutoSize = true;
+            this.liveRendering.Checked = true;
+            this.liveRendering.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.liveRendering.Location = new System.Drawing.Point(124, 228);
+            this.liveRendering.Name = "liveRendering";
+            this.liveRendering.Size = new System.Drawing.Size(98, 17);
+            this.liveRendering.TabIndex = 5;
+            this.liveRendering.Text = "Live Rendering";
+            this.liveRendering.UseVisualStyleBackColor = true;
+            // 
             // RenderSettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(243, 276);
+            this.ClientSize = new System.Drawing.Size(243, 305);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -426,5 +441,6 @@
         private System.Windows.Forms.CheckBox haltOnException;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown sampleCount;
+        private System.Windows.Forms.CheckBox liveRendering;
     }
 }
