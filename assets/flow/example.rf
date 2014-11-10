@@ -32,11 +32,14 @@ textured Shader.Surface {
 	}
 }
 
-nonreflective Shader.Surface {
-	Diffuse = 0.6,
-	Specular = 0.6,
-	Subshader = Shader.Color {
-		Color = (0.5, 0.5, 0.5)
+lessreflective Shader.Reflection {
+	Reflectivity = 0.1,
+	Subshader = Shader.Surface {
+		Diffuse = 0.6,
+		Specular = 0.6,
+		Subshader = Shader.Color {
+			Color = (0.5, 0.5, 0.5)
+		}
 	}
 }
 
@@ -45,9 +48,7 @@ nonreflective Shader.Surface {
 sphere1 Primitive.Sphere {
 	Shader = $textured,
 	Transform = Util.Transform {
-		Rotation = (0, 180, 0),
-		Position = (0, 0, 0),
-		Scale = (1, 1, 1)
+		Scale = (2, 1, 1)
 	}
 }
 
@@ -62,7 +63,7 @@ plane1 Primitive.Plane {
 	Transform = Util.Transform {
 		Position = (0, -3, 0)
 	},
-	Shader = $nonreflective
+	Shader = $lessreflective
 }
 
 light1 Light.Point {

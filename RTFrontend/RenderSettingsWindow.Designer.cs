@@ -130,7 +130,7 @@
             this.renderButton.Margin = new System.Windows.Forms.Padding(2);
             this.renderButton.Name = "renderButton";
             this.renderButton.Size = new System.Drawing.Size(123, 53);
-            this.renderButton.TabIndex = 10;
+            this.renderButton.TabIndex = 12;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = true;
             this.renderButton.Click += new System.EventHandler(this.renderButton_Click);
@@ -381,7 +381,7 @@
             this.liveRendering.Location = new System.Drawing.Point(129, 228);
             this.liveRendering.Name = "liveRendering";
             this.liveRendering.Size = new System.Drawing.Size(98, 17);
-            this.liveRendering.TabIndex = 5;
+            this.liveRendering.TabIndex = 10;
             this.liveRendering.Text = "Live Rendering";
             this.liveRendering.UseVisualStyleBackColor = true;
             // 
@@ -392,7 +392,7 @@
             this.saveButton.Location = new System.Drawing.Point(3, 277);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(120, 51);
-            this.saveButton.TabIndex = 11;
+            this.saveButton.TabIndex = 13;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -403,7 +403,7 @@
             this.randomjobOrder.Location = new System.Drawing.Point(129, 251);
             this.randomjobOrder.Name = "randomjobOrder";
             this.randomjobOrder.Size = new System.Drawing.Size(115, 17);
-            this.randomjobOrder.TabIndex = 5;
+            this.randomjobOrder.TabIndex = 11;
             this.randomjobOrder.Text = "Random Job Order";
             this.randomjobOrder.UseVisualStyleBackColor = true;
             // 
