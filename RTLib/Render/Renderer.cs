@@ -38,12 +38,12 @@ namespace RTLib.Render
             }
         }
 
-        public void StartRender(int threadCount, bool stopWorkerOnException = true)
+        public void StartRender(int threadCount, bool stopWorkerOnException = true, bool randomJobOrder = false)
         {
             Console.WriteLine("Rendering scene: " + Context);
 
             Console.Write("Building render state... ");
-            State = new RenderState(Context.Width, Context.Height);
+            State = new RenderState(Context.Width, Context.Height, randomJobOrder);
             Console.WriteLine("done");
 
             Console.WriteLine(string.Format("Starting {0} worker threads", threadCount));

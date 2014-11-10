@@ -32,6 +32,8 @@ namespace RTFrontend
 
         public bool LiveRendering { get { return liveRendering.Checked; } }
 
+        public bool RandomJobOrder { get { return randomjobOrder.Checked; } }
+
         private RenderWindow _renderWindow = null;
 
         public RenderSettingsWindow(RenderWindow rw)

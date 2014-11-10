@@ -23,16 +23,36 @@ namespace RTLib.Render
 
         private ConcurrentQueue<RenderJob> _finishedJobQueue = new ConcurrentQueue<RenderJob>(); 
 
-        public RenderState(int width, int height)
+        public RenderState(int width, int height, bool randomJobOrder)
         {
             _pixels = new RenderColor[width,height];
 
+            List<RenderJob> jobs = new List<RenderJob>();
             for (int j = 0; j < height; ++j)
             {
                 for (int i = 0; i < width; ++i)
                 {
-                    _jobs.Enqueue(new RenderJob() {I = i, J = j});
+                    jobs.Add(new RenderJob() { I = i, J = j });
                 }
+            }
+
+            if (randomJobOrder)
+            {
+                Random random = new Random();
+                int n = jobs.Count;
+                while (n > 1)
+                {
+                    n--;
+                    int k = random.Next(n + 1);
+                    RenderJob value = jobs[k];
+                    jobs[k] = jobs[n];
+                    jobs[n] = value;
+                }
+            }
+
+            foreach (RenderJob job in jobs)
+            {
+                _jobs.Enqueue(job);
             }
         }
 

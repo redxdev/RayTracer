@@ -33,6 +33,9 @@ namespace RTFrontend
         {
             InitializeComponent();
 
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer,
+                true);
+
             worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
@@ -126,7 +129,7 @@ namespace RTFrontend
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            _renderer.StartRender(renderSettingsWindow.ThreadCount, renderSettingsWindow.HaltOnException);
+            _renderer.StartRender(renderSettingsWindow.ThreadCount, renderSettingsWindow.HaltOnException, renderSettingsWindow.RandomJobOrder);
             pixelsLeft = _renderer.State.JobsLeft;
 
             double lastStatusUpdate = 0;

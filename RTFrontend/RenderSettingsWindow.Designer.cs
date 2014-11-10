@@ -47,8 +47,10 @@
             this.haltOnException = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.sampleCount = new System.Windows.Forms.NumericUpDown();
-            this.saveButton = new System.Windows.Forms.Button();
             this.liveRendering = new System.Windows.Forms.CheckBox();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.randomjobOrder = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threadCount)).BeginInit();
@@ -64,7 +66,7 @@
             // 
             this.resHeight.AutoSize = true;
             this.resHeight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resHeight.Location = new System.Drawing.Point(123, 26);
+            this.resHeight.Location = new System.Drawing.Point(128, 26);
             this.resHeight.Margin = new System.Windows.Forms.Padding(2);
             this.resHeight.Maximum = new decimal(new int[] {
             2160,
@@ -77,7 +79,7 @@
             0,
             0});
             this.resHeight.Name = "resHeight";
-            this.resHeight.Size = new System.Drawing.Size(118, 20);
+            this.resHeight.Size = new System.Drawing.Size(123, 20);
             this.resHeight.TabIndex = 2;
             this.resHeight.Value = new decimal(new int[] {
             480,
@@ -99,7 +101,7 @@
             // 
             this.resWidth.AutoSize = true;
             this.resWidth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resWidth.Location = new System.Drawing.Point(123, 2);
+            this.resWidth.Location = new System.Drawing.Point(128, 2);
             this.resWidth.Margin = new System.Windows.Forms.Padding(2);
             this.resWidth.Maximum = new decimal(new int[] {
             3840,
@@ -112,7 +114,7 @@
             0,
             0});
             this.resWidth.Name = "resWidth";
-            this.resWidth.Size = new System.Drawing.Size(118, 20);
+            this.resWidth.Size = new System.Drawing.Size(123, 20);
             this.resWidth.TabIndex = 1;
             this.resWidth.Value = new decimal(new int[] {
             640,
@@ -124,10 +126,10 @@
             // 
             this.renderButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.renderButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.renderButton.Location = new System.Drawing.Point(123, 250);
+            this.renderButton.Location = new System.Drawing.Point(128, 276);
             this.renderButton.Margin = new System.Windows.Forms.Padding(2);
             this.renderButton.Name = "renderButton";
-            this.renderButton.Size = new System.Drawing.Size(118, 53);
+            this.renderButton.Size = new System.Drawing.Size(123, 53);
             this.renderButton.TabIndex = 10;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = true;
@@ -147,7 +149,7 @@
             // 
             this.threadCount.AutoSize = true;
             this.threadCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.threadCount.Location = new System.Drawing.Point(123, 128);
+            this.threadCount.Location = new System.Drawing.Point(128, 128);
             this.threadCount.Margin = new System.Windows.Forms.Padding(2);
             this.threadCount.Minimum = new decimal(new int[] {
             1,
@@ -155,7 +157,7 @@
             0,
             0});
             this.threadCount.Name = "threadCount";
-            this.threadCount.Size = new System.Drawing.Size(118, 20);
+            this.threadCount.Size = new System.Drawing.Size(123, 20);
             this.threadCount.TabIndex = 6;
             this.threadCount.Value = new decimal(new int[] {
             1,
@@ -186,13 +188,15 @@
             this.tableLayoutPanel1.Controls.Add(this.haltOnException, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.sampleCount, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.renderButton, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.saveButton, 0, 11);
             this.tableLayoutPanel1.Controls.Add(this.liveRendering, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.renderButton, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.saveButton, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.randomjobOrder, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 11);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 12;
+            this.tableLayoutPanel1.RowCount = 13;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -205,7 +209,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(243, 305);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(253, 325);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // label4
@@ -230,7 +235,7 @@
             // 
             this.fieldOfView.AutoSize = true;
             this.fieldOfView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fieldOfView.Location = new System.Drawing.Point(124, 51);
+            this.fieldOfView.Location = new System.Drawing.Point(129, 51);
             this.fieldOfView.Maximum = new decimal(new int[] {
             360,
             0,
@@ -242,7 +247,7 @@
             0,
             0});
             this.fieldOfView.Name = "fieldOfView";
-            this.fieldOfView.Size = new System.Drawing.Size(116, 20);
+            this.fieldOfView.Size = new System.Drawing.Size(121, 20);
             this.fieldOfView.TabIndex = 3;
             this.fieldOfView.Value = new decimal(new int[] {
             90,
@@ -273,28 +278,28 @@
             this.nearClipPlane.AutoSize = true;
             this.nearClipPlane.DecimalPlaces = 1;
             this.nearClipPlane.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nearClipPlane.Location = new System.Drawing.Point(124, 77);
+            this.nearClipPlane.Location = new System.Drawing.Point(129, 77);
             this.nearClipPlane.Maximum = new decimal(new int[] {
             0,
             0,
             0,
             0});
             this.nearClipPlane.Name = "nearClipPlane";
-            this.nearClipPlane.Size = new System.Drawing.Size(116, 20);
+            this.nearClipPlane.Size = new System.Drawing.Size(121, 20);
             this.nearClipPlane.TabIndex = 4;
             // 
             // farClipPlane
             // 
             this.farClipPlane.DecimalPlaces = 1;
             this.farClipPlane.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.farClipPlane.Location = new System.Drawing.Point(124, 103);
+            this.farClipPlane.Location = new System.Drawing.Point(129, 103);
             this.farClipPlane.Maximum = new decimal(new int[] {
             0,
             0,
             0,
             0});
             this.farClipPlane.Name = "farClipPlane";
-            this.farClipPlane.Size = new System.Drawing.Size(116, 20);
+            this.farClipPlane.Size = new System.Drawing.Size(121, 20);
             this.farClipPlane.TabIndex = 5;
             // 
             // label7
@@ -309,14 +314,14 @@
             // maxRecursionDepth
             // 
             this.maxRecursionDepth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.maxRecursionDepth.Location = new System.Drawing.Point(124, 153);
+            this.maxRecursionDepth.Location = new System.Drawing.Point(129, 153);
             this.maxRecursionDepth.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.maxRecursionDepth.Name = "maxRecursionDepth";
-            this.maxRecursionDepth.Size = new System.Drawing.Size(116, 20);
+            this.maxRecursionDepth.Size = new System.Drawing.Size(121, 20);
             this.maxRecursionDepth.TabIndex = 7;
             this.maxRecursionDepth.Value = new decimal(new int[] {
             16,
@@ -329,7 +334,7 @@
             this.haltOnException.AutoSize = true;
             this.haltOnException.Checked = true;
             this.haltOnException.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.haltOnException.Location = new System.Drawing.Point(124, 179);
+            this.haltOnException.Location = new System.Drawing.Point(129, 179);
             this.haltOnException.Name = "haltOnException";
             this.haltOnException.Size = new System.Drawing.Size(109, 17);
             this.haltOnException.TabIndex = 8;
@@ -348,7 +353,7 @@
             // sampleCount
             // 
             this.sampleCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sampleCount.Location = new System.Drawing.Point(124, 202);
+            this.sampleCount.Location = new System.Drawing.Point(129, 202);
             this.sampleCount.Maximum = new decimal(new int[] {
             144,
             0,
@@ -360,7 +365,7 @@
             0,
             0});
             this.sampleCount.Name = "sampleCount";
-            this.sampleCount.Size = new System.Drawing.Size(116, 20);
+            this.sampleCount.Size = new System.Drawing.Size(121, 20);
             this.sampleCount.TabIndex = 9;
             this.sampleCount.Value = new decimal(new int[] {
             1,
@@ -368,35 +373,54 @@
             0,
             0});
             // 
-            // saveButton
-            // 
-            this.saveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.saveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.saveButton.Location = new System.Drawing.Point(3, 251);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(115, 51);
-            this.saveButton.TabIndex = 11;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
             // liveRendering
             // 
             this.liveRendering.AutoSize = true;
             this.liveRendering.Checked = true;
             this.liveRendering.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.liveRendering.Location = new System.Drawing.Point(124, 228);
+            this.liveRendering.Location = new System.Drawing.Point(129, 228);
             this.liveRendering.Name = "liveRendering";
             this.liveRendering.Size = new System.Drawing.Size(98, 17);
             this.liveRendering.TabIndex = 5;
             this.liveRendering.Text = "Live Rendering";
             this.liveRendering.UseVisualStyleBackColor = true;
             // 
+            // saveButton
+            // 
+            this.saveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.saveButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.saveButton.Location = new System.Drawing.Point(3, 277);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(120, 51);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // randomjobOrder
+            // 
+            this.randomjobOrder.AutoSize = true;
+            this.randomjobOrder.Location = new System.Drawing.Point(129, 251);
+            this.randomjobOrder.Name = "randomjobOrder";
+            this.randomjobOrder.Size = new System.Drawing.Size(115, 17);
+            this.randomjobOrder.TabIndex = 5;
+            this.randomjobOrder.Text = "Random Job Order";
+            this.randomjobOrder.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 248);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(116, 26);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Random job order may cause issues";
+            // 
             // RenderSettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(243, 305);
+            this.ClientSize = new System.Drawing.Size(253, 325);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -442,5 +466,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown sampleCount;
         private System.Windows.Forms.CheckBox liveRendering;
+        private System.Windows.Forms.CheckBox randomjobOrder;
+        private System.Windows.Forms.Label label9;
     }
 }
