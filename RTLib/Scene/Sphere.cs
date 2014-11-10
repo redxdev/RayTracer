@@ -78,5 +78,17 @@ namespace RTLib.Scene
             normal[3] = 0;
             return normal;
         }
+
+        public override Vector<double> GetUV(Vector<double> point)
+        {
+            Vector<double> origin = Vector<double>.Build.DenseOfArray(new double[] {0, 0, 0, 1});
+            origin *= Transform;
+            Vector<double> p = point - origin;
+
+            double u = 0.5d + Math.Atan2(p[2], p[0])/(2d*Math.PI);
+            double v = 0.5d - Math.Asin(p[1])/Math.PI;
+
+            return Vector<double>.Build.DenseOfArray(new double[] {u, v});
+        }
     }
 }

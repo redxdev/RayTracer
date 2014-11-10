@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -39,17 +40,17 @@ namespace RTLib.Flow
         }
 
 
-        public static FlowScene ParseString(string input)
+        public static FlowScene ParseString(string input, string basePath)
         {
-            return Parse(new AntlrInputStream(input));
+            return Parse(new AntlrInputStream(input), basePath);
         }
 
         public static FlowScene ParseFile(string filename)
         {
-            return Parse(new AntlrFileStream(filename));
+            return Parse(new AntlrFileStream(filename), Path.GetDirectoryName(filename));
         }
 
-        public static FlowScene Parse(ICharStream input)
+        public static FlowScene Parse(ICharStream input, string path)
         {
             FlowLangLexer lexer = new FlowLangLexer(input);
 
@@ -58,6 +59,8 @@ namespace RTLib.Flow
             FlowLangParser parser = new FlowLangParser(tokenStream);
 
             parser.Scene = new FlowScene();
+            parser.Scene.RelativePath = path;
+
             List<IModuleBuilder> builders = CreateModuleBuilders();
             foreach (IModuleBuilder builder in builders)
             {

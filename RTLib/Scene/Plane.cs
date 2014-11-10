@@ -45,5 +45,15 @@ namespace RTLib.Scene
             normal /= normal.Norm(2d);
             return normal;
         }
+
+        public override Vector<double> GetUV(Vector<double> point)
+        {
+            Vector<double> normal = GetNormal(null);
+            Vector<double> uAxis = Vector<double>.Build.DenseOfArray(new double[] {normal[1], normal[2], -normal[0], 0});
+            Vector<double> vAxis = MathHelper.CrossProduct(uAxis, normal, 0);
+            double u = point.DotProduct(uAxis);
+            double v = point.DotProduct(vAxis);
+            return Vector<double>.Build.DenseOfArray(new double[] {u, v});
+        }
     }
 }

@@ -138,15 +138,15 @@ namespace RTFrontend
             {
                 if (lastStatusUpdate + 1d < stopwatch.Elapsed.TotalSeconds)
                 {
-                    lastStatusUpdate = stopwatch.Elapsed.TotalSeconds;
-
                     int newPixelsLeft = _renderer.State.JobsLeft;
-                    int pixelsFinished = pixelsLeft - newPixelsLeft;
+                    double pixelsFinishedPerSecond = (pixelsLeft - newPixelsLeft) / (stopwatch.Elapsed.TotalSeconds - lastStatusUpdate);
                     pixelsLeft = newPixelsLeft;
-                    double timeLeft = pixelsLeft / (double)pixelsFinished;
+                    double timeLeft = pixelsLeft / pixelsFinishedPerSecond;
                     Console.WriteLine(string.Format(
-                        "Status: {0} pixels/second, {1} left to render, ~{2:0.00} seconds left", pixelsFinished, pixelsLeft,
+                        "Status: {0:0.00} pixels/second, {1} left to render, ~{2:0.00} seconds left", pixelsFinishedPerSecond, pixelsLeft,
                         timeLeft));
+
+                    lastStatusUpdate = stopwatch.Elapsed.TotalSeconds;
                 }
 
                 if (renderSettingsWindow.LiveRendering)
@@ -198,6 +198,9 @@ namespace RTFrontend
             RenderJob[] jobs = args.Item1;
             foreach (RenderJob job in jobs)
             {
+                if (_renderer.IsFinished)
+                    return;
+
                 RenderColor color = _renderer.State.Pixels[job.I, job.J];
                 System.Drawing.Color bmpColor = System.Drawing.Color.FromArgb(255, color.RByte, color.GByte,
                     color.BByte);

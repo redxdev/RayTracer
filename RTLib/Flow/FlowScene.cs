@@ -11,11 +11,13 @@ namespace RTLib.Flow
 {
     public class FlowScene
     {
+        public string RelativePath { get; set; }
+
+        public IDictionary<string, IFlowValue> Variables { get { return variables; } }
+
         private IDictionary<string, IModuleBuilder> moduleBuilders = new Dictionary<string, IModuleBuilder>();
 
         private IDictionary<string, IFlowValue> variables = new Dictionary<string, IFlowValue>();
-
-        public IDictionary<string, IFlowValue> Variables { get { return variables; } }
 
         private IDictionary<string, IModuleBuilder> ModuleBuilders { get { return moduleBuilders; } }
 

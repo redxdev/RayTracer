@@ -19,6 +19,11 @@ namespace RTLib.Util
             return new RenderColor(vector[0], vector[1], vector[2]);
         }
 
+        public static RenderColor FromColor(Color color)
+        {
+            return new RenderColor(color.R / 255d, color.G / 255d, color.B / 255d);
+        }
+
         public static RenderColor operator *(RenderColor color, double val)
         {
             return new RenderColor(color._r*val, color._g*val, color._b*val);

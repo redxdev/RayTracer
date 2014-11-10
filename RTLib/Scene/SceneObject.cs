@@ -22,5 +22,7 @@ namespace RTLib.Scene
         public abstract RenderColor Shade(Context context, TraceResult trace);
 
         public abstract Vector<double> GetNormal(Vector<double> point);
+
+        public abstract Vector<double> GetUV(Vector<double> point);
     }
 }

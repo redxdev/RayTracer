@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Flow\Modules\BitmapTextureModule.cs" />
     <Compile Include="Flow\Modules\ColorShaderModule.cs" />
     <Compile Include="Flow\Modules\IModuleBuilder.cs" />
     <Compile Include="Flow\Modules\CameraModule.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Flow\Modules\ReflectionShaderModule.cs" />
     <Compile Include="Flow\Modules\SpherePrimitiveModule.cs" />
     <Compile Include="Flow\Modules\SurfaceShaderModule.cs" />
+    <Compile Include="Flow\Modules\TextureShaderModule.cs" />
     <Compile Include="Flow\Modules\TransformModule.cs" />
     <Compile Include="Flow\GenericValue.cs" />
     <Compile Include="Flow\VariableValue.cs" />
@@ -78,6 +80,9 @@
     <Compile Include="Material\ReflectionShader.cs" />
     <Compile Include="Material\SurfaceShader.cs" />
     <Compile Include="Material\SurfaceNormalShader.cs" />
+    <Compile Include="Material\TextureShader.cs" />
+    <Compile Include="Material\Texture\RawTexture.cs" />
+    <Compile Include="Material\Texture\ITexture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\Context.cs" />
     <Compile Include="Render\Camera.cs" />

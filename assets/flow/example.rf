@@ -22,6 +22,19 @@ reflective Shader.Reflection {
 	}
 }
 
+textured Shader.Reflection {
+	Reflectivity = 0.2,
+	Subshader = Shader.Surface {
+		Diffuse = 0.6,
+		Specular = 0.6,
+		Subshader = Shader.Texture {
+			Texture = Texture.Bitmap {
+				Path = "../textures/checkerboard.bmp"
+			}
+		}
+	}
+}
+
 nonreflective Shader.Surface {
 	Diffuse = 0.6,
 	Specular = 0.6,
@@ -33,7 +46,7 @@ nonreflective Shader.Surface {
 // This defines a scene object which will be
 // displayed by the renderer.
 sphere1 Primitive.Sphere {
-	Shader = $reflective
+	Shader = $textured
 }
 
 sphere2 Primitive.Sphere {
