@@ -75,6 +75,7 @@
     <Compile Include="Flow\Modules\TextureShaderModule.cs" />
     <Compile Include="Flow\Modules\TransformModule.cs" />
     <Compile Include="Flow\GenericValue.cs" />
+    <Compile Include="Flow\Modules\UVShaderModule.cs" />
     <Compile Include="Flow\VariableValue.cs" />
     <Compile Include="Material\ColorShader.cs" />
     <Compile Include="Material\DelegateShader.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Material\TextureShader.cs" />
     <Compile Include="Material\Texture\RawTexture.cs" />
     <Compile Include="Material\Texture\ITexture.cs" />
+    <Compile Include="Material\UVShader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\Context.cs" />
     <Compile Include="Render\Camera.cs" />
