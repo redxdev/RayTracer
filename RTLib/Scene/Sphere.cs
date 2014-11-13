@@ -42,7 +42,7 @@ namespace RTLib.Scene
 
         public double RadiusSquared { get { return _radiusSquared; } }
 
-        public override bool Intersects(Ray ray, out double t)
+        public override TraceHit Intersects(Ray ray, out double t)
         {
             Vector<double> rorig = ray.Origin*InverseTransform;
             Vector<double> rdir = ray.Direction*InverseTransform;
@@ -55,7 +55,7 @@ namespace RTLib.Scene
             if (discr <= 0)
             {
                 t = 0;
-                return false;
+                return TraceHit.Miss;
             }
 
             double discrSqrt = Math.Sqrt(discr);
@@ -63,7 +63,11 @@ namespace RTLib.Scene
             double t1 = (-b - discrSqrt)/(2d*a);
 
             t = t0 < t1 ? t0 : t1;
-            return true;
+
+            if (t0 < 0 && t1 > 0 || t0 > 0 && t1 < 0)
+                return TraceHit.HitInternal;
+
+            return TraceHit.Hit;
         }
 
         public override RenderColor Shade(Context context, TraceResult trace)

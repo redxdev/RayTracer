@@ -69,6 +69,7 @@
     <Compile Include="Flow\Modules\PlanePrimitiveModule.cs" />
     <Compile Include="Flow\Modules\PointLightModule.cs" />
     <Compile Include="Flow\Modules\ReflectionShaderModule.cs" />
+    <Compile Include="Flow\Modules\RefractionShaderModule.cs" />
     <Compile Include="Flow\Modules\SpherePrimitiveModule.cs" />
     <Compile Include="Flow\Modules\SurfaceNormalShaderModule.cs" />
     <Compile Include="Flow\Modules\SurfaceShaderModule.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Material\ColorShader.cs" />
     <Compile Include="Material\DelegateShader.cs" />
     <Compile Include="Material\ReflectionShader.cs" />
+    <Compile Include="Material\RefractionShader.cs" />
     <Compile Include="Material\SurfaceShader.cs" />
     <Compile Include="Material\SurfaceNormalShader.cs" />
     <Compile Include="Material\TextureShader.cs" />

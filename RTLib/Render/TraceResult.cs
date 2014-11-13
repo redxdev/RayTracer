@@ -9,6 +9,13 @@ using RTLib.Scene;
 
 namespace RTLib.Render
 {
+    public enum TraceHit
+    {
+        Miss,
+        Hit,
+        HitInternal
+    }
+
     public struct TraceResult
     {
         public double T { get; set; }
@@ -20,5 +27,7 @@ namespace RTLib.Render
         public SceneObject HitObject { get; set; }
 
         public IRayTracer Raytracer { get; set; }
+
+        public TraceHit HitType { get; set; }
     }
 }

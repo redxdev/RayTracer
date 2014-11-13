@@ -100,7 +100,7 @@ namespace RTLib.Render
                 _renderer.Context.RenderCamera.NearClipPlane, _renderer.Context.RenderCamera.FarClipPlane);
         }
 
-        public TraceResult? Trace(Ray ray)
+        public TraceResult? Trace(Ray ray, bool allowInternalHit = true)
         {
             if (ray.Recursion > _renderer.Context.MaxRecursion)
             {
@@ -109,16 +109,19 @@ namespace RTLib.Render
 
             double tClosest = ray.MaxDistance;
             SceneObject hitObject = null;
+            TraceHit hitType = TraceHit.Miss;
 
             foreach (var obj in _renderer.Context.Graph.Objects)
             {
                 double t = 0;
-                if (obj.Intersects(ray, out t))
+                TraceHit hit = obj.Intersects(ray, out t);
+                if (hit == TraceHit.Hit || (allowInternalHit && hit == TraceHit.HitInternal))
                 {
                     if (t < tClosest && t > ray.MinDistance)
                     {
                         tClosest = t;
                         hitObject = obj;
+                        hitType = hit;
                     }
                 }
             }
@@ -132,7 +135,8 @@ namespace RTLib.Render
                 Raycast = ray,
                 Intersection = ray.Origin + ray.Direction*tClosest,
                 HitObject = hitObject,
-                Raytracer = this
+                Raytracer = this,
+                HitType =  hitType
             };
         }
     }

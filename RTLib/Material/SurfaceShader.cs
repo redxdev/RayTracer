@@ -62,7 +62,7 @@ namespace RTLib.Material
                 foreach(SceneObject other in context.Graph.Objects)
                 {
                     double t = 0;
-                    if (other.Intersects(shadowRay, out t))
+                    if (other.Intersects(shadowRay, out t) == TraceHit.Hit)
                     {
                         if (other == obj)
                             tThis = t;

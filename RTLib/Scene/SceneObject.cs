@@ -17,7 +17,7 @@ namespace RTLib.Scene
         {
         }
 
-        public abstract bool Intersects(Ray ray, out double t);
+        public abstract TraceHit Intersects(Ray ray, out double t);
 
         public abstract RenderColor Shade(Context context, TraceResult trace);
 

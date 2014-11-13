@@ -19,7 +19,7 @@ namespace RTLib.Scene
 
         public IShader Shader { get; set; }
 
-        public override bool Intersects(Ray ray, out double t)
+        public override TraceHit Intersects(Ray ray, out double t)
         {
             Vector<double> rorig = ray.Origin * InverseTransform;
             Vector<double> rdir = ray.Direction * InverseTransform;
@@ -28,9 +28,9 @@ namespace RTLib.Scene
             
             t = -(rorig.DotProduct(normal))/(rdir.DotProduct(normal));
             if (t <= 0)
-                return false;
+                return TraceHit.Miss;
 
-            return true;
+            return TraceHit.Hit;
         }
 
         public override RenderColor Shade(Context context, TraceResult trace)
