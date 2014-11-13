@@ -6,8 +6,8 @@
 // This defines a camera
 camera Camera {
 	Transform = Util.Transform {
-		Position = (0, 1, 5),
-		Rotation = (10, 0, 0)
+		Position = (0, 1.7, 5),
+		Rotation = (25, 0, 0)
 	}
 }
 

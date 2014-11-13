@@ -86,10 +86,10 @@ namespace RTLib.Scene
 
         public override Vector<double> GetUV(Vector<double> point)
         {
-            Vector<double> p = point*InverseTransform;
+            Vector<double> d = GetNormal(point);
 
-            double u = 0.5d + Math.Atan2(p[2], p[0])/(2d*Math.PI);
-            double v = 0.5d - Math.Asin(p[1])/Math.PI;
+            double u = 0.5d + Math.Atan2(d[2], -d[0])/(2d*Math.PI);
+            double v = 0.5d - Math.Asin(d[1])/Math.PI;
 
             return Vector<double>.Build.DenseOfArray(new double[] {u, v});
         }
