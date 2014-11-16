@@ -13,7 +13,7 @@ namespace RTLib.Material
 {
     public class RefractionShader : IShader
     {
-        public RefractionShader(double refractionIndex, IShader subshader)
+        public RefractionShader(double refractivity, double refractionIndex, IShader subshader)
         {
             RefractionIndex = refractionIndex;
             Subshader = subshader;
@@ -43,7 +43,7 @@ namespace RTLib.Material
                 if (result != null)
                 {
                     RenderColor refractColor = result.Value.HitObject.Shade(context, result.Value);
-                    RenderColor localColor = Subshader.RunShader(spatial, context, trace);
+                    RenderColor localColor = new RenderColor(1, 1, 1) - Subshader.RunShader(spatial, context, trace);
                     RenderColor absorbance = localColor*0.15d*-result.Value.T;
                     RenderColor transparency = new RenderColor(Math.Exp(absorbance.R), Math.Exp(absorbance.G), Math.Exp(absorbance.B));
                     return refractColor*transparency;

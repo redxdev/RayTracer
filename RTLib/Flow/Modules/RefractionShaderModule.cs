@@ -17,10 +17,11 @@ namespace RTLib.Flow.Modules
 
         public IFlowValue CreateModule(FlowScene scene, IDictionary<string, IFlowValue> parameters)
         {
+            double refractivity = FlowUtilities.BuildParameter<double>(scene, parameters, "Refractivity");
             double refractionIndex = FlowUtilities.BuildParameter<double>(scene, parameters, "RefractionIndex");
             IShader subshader = FlowUtilities.BuildParameter<IShader>(scene, parameters, "Subshader");
 
-            RefractionShader shader = new RefractionShader(refractionIndex, subshader);
+            RefractionShader shader = new RefractionShader(refractivity, refractionIndex, subshader);
             return new GenericValue<RefractionShader>() {Value = shader};
         }
     }
