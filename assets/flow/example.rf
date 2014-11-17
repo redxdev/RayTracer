@@ -6,8 +6,8 @@
 // This defines a camera
 camera Camera {
 	Transform = Util.Transform {
-		Position = (0, 0, 5),
-		Rotation = (0, 0, 0)
+		Position = (0, 2, 5),
+		Rotation = (20, 0, 0)
 	}
 }
 
@@ -44,21 +44,6 @@ lessreflective Shader.Reflection {
 	}
 }
 
-refractive Shader.Refraction {
-	Refractivity = 0.7,
-	RefractionIndex = 1.3,
-	Subshader = Shader.Reflection {
-		Reflectivity = 0.2,
-		Subshader = Shader.Surface {
-			Diffuse = 0.6,
-			Specular = 0.6,
-			Subshader = Shader.Color {
-				Color = (0, 0, 1)
-			}
-		}
-	}
-}
-
 // This defines a scene object which will be
 // displayed by the renderer.
 sphere1 Primitive.Sphere {
@@ -75,14 +60,6 @@ sphere2 Primitive.Sphere {
 	}
 }
 
-sphere3 Primitive.Sphere {
-	Shader = $refractive,
-	Radius = 2,
-	Transform = Util.Transform {
-		Position = (-0.5, 0, 0)
-	}
-}
-
 plane1 Primitive.Plane {
 	Transform = Util.Transform {
 		Position = (0, -3, 0)
@@ -93,15 +70,6 @@ plane1 Primitive.Plane {
 light1 Light.Point {
 	Transform = Util.Transform {
 		Position = (-2, 1, 3)
-	},
-	Shader = Shader.Color {
-		Color = (1, 1, 1)
-	}
-}
-
-light2 Light.Point {
-	Transform = Util.Transform {
-		Position = (0, 2, -10)
 	},
 	Shader = Shader.Color {
 		Color = (1, 1, 1)

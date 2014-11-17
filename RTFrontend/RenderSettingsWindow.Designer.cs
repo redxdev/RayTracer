@@ -348,7 +348,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(64, 13);
             this.label8.TabIndex = 5;
-            this.label8.Text = "AA Samples";
+            this.label8.Text = "AA Level";
             // 
             // sampleCount
             // 

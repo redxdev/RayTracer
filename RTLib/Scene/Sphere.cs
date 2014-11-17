@@ -64,9 +64,6 @@ namespace RTLib.Scene
 
             t = t0 < t1 ? t0 : t1;
 
-            if (t0 < 0 && t1 > 0 || t0 > 0 && t1 < 0)
-                return TraceHit.HitInternal;
-
             return TraceHit.Hit;
         }
 

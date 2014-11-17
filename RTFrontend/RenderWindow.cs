@@ -99,7 +99,7 @@ namespace RTFrontend
                 Width = _xres,
                 Height = _yres,
                 MaxRecursion = renderSettingsWindow.MaxRecursionDepth,
-                SampleCount = renderSettingsWindow.SampleCount,
+                SampleCount = renderSettingsWindow.SampleCount * renderSettingsWindow.SampleCount,
                 RenderCamera = flow.BuildCamera(),
                 Graph = flow.BuildGraph()
             };
