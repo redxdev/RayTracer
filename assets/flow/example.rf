@@ -4,6 +4,7 @@
 // objects and materials.
 
 // This defines a camera
+// You should only have a single camera defined.
 camera Camera {
 	Transform = Util.Transform {
 		Position = (0, 2, 5),
@@ -14,6 +15,17 @@ camera Camera {
 // This defines a material for use elsewhere.
 reflective Shader.Reflection {
 	Reflectivity = 0.2,
+	Subshader = Shader.Surface {
+		Diffuse = 0.6,
+		Specular = 0.6,
+		Subshader = Shader.Color {
+			Color = (0.5, 0.5, 0.5)
+		}
+	}
+}
+
+veryreflective Shader.Reflection {
+	Reflectivity = 0.8,
 	Subshader = Shader.Surface {
 		Diffuse = 0.6,
 		Specular = 0.6,
@@ -57,6 +69,13 @@ sphere2 Primitive.Sphere {
 	Shader = $reflective,
 	Transform = Util.Transform {
 		Position = (-4, 0, -4)
+	}
+}
+
+sphere3 Primitive.Sphere {
+	Shader = $veryreflective,
+	Transform = Util.Transform {
+		Position = (-3, 0, -0.5)
 	}
 }
 
