@@ -14,7 +14,7 @@ namespace RTLib.Util
         public static RenderColor FromVector(Vector<double> vector)
         {
             if(vector.Count < 3)
-                throw new InvalidCastException("Cannot convert a vector of < 3 size to a RenderCollor");
+                throw new InvalidCastException("Cannot convert a vector of < 3 size to a RenderColor");
 
             return new RenderColor(vector[0], vector[1], vector[2]);
         }
