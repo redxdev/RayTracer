@@ -9,7 +9,7 @@ using RTLib.Util;
 
 namespace RTLib.Scene
 {
-    public abstract class Light :Spatial
+    public abstract class Light : Spatial
     {
         protected Light(Matrix<double> transform) : base(transform)
         {
